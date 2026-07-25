@@ -11,7 +11,7 @@ This section describes the final implementation of the dynamic Multi-Armed Bandi
 \subsection{Technology Stack and Software Architecture}
 The framework uses a two-tier software architecture built on two primary programming environments:
 \begin{itemize}
-    \item \textbf{Python Execution Engine (v3.11):} Serves as the primary control plane; housing the multi-armed bandit decision algorithms, workload trace ingestion module, statistical workload fingerprinter, and batch-relative reward transformer. It relies on \texttt{NumPy} and \texttt{SciPy} for vectorized statistical operations and \texttt{Pandas} for trace parsing.
+    \item \textbf{Python Execution Engine (v3.11):} Serves as the primary control plane; housing the multi-armed bandit decision algorithms, workload trace ingestion module, statistical workload fingerprinter, and batch-relative reward transformer. It uses \texttt{NumPy} and \texttt{SciPy} for vectorized statistical operations and \texttt{Pandas} for trace parsing.
     \item \textbf{Java Simulation Engine (OpenJDK 21 / CloudSim Plus v7.3.0):} Acts as the discrete-event cloud execution backend. We extended CloudSim Plus core classes to support dynamic low-level heuristic instantiation, dynamic VM status manipulation, real-time energy calculation, and streaming I/O serialization.
 \end{itemize}
 
@@ -53,5 +53,5 @@ The execution pipeline produces three main structured artefacts for post-hoc ana
 \begin{enumerate}
     \item \textbf{Raw Trace Log Stream:} JSON-Lines files generated per run, recording batch-level decision metrics including selected heuristic arm, Coefficient of Variation ($\text{CoV}$), raw makespan, monetary cost, carbon output, mean VM utilization, and squashed reward $R_k$.
     \item \textbf{Bandit Internal State Logs:} Historical records tracking parameter updates across decision rounds, including Q-value arrays, discounted pull counts $N_k(\gamma, a)$, upper confidence bound boundaries, and Thompson Sampling Beta distribution parameters ($\alpha_a, \beta_a$).
-    \item \textbf{Aggregated Seed Benchmark Dataset:} Structured CSV files combining metrics across all 10 random seeds per MAB variant and trace dataset. This dataset powers the statistical hypothesis testing, rolling mean generation, and policy transition analyses presented in Section~\ref{sec:Evaluation}.
+    \item \textbf{Aggregated Seed Benchmark Dataset:} Structured CSV files combining metrics across all 10 random seeds per MAB variant and trace dataset.
 \end{enumerate}

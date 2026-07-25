@@ -5,12 +5,12 @@
 \section{Methodology}
 \label{sec:Methodology}
 
-Building upon the gaps identified in Section~\ref{sec:rw}, this section details the theoretical and empirical methodology underpinning our dynamic Multi-Armed Bandit (MAB) hyper-heuristic framework. The problem space is formalized, the low-level heuristic pool is defined, the mathematical formulations for the MAB algorithms are presented, the workload fingerprinting and multi-objective reward model are explained, and the statistical evaluation protocol is outlined.
+Building upon the gaps identified in Section~\ref{sec:rw}, this section expands on the theoretical and empirical methodology underpinning the framework. The problem space is formalized, the low-level heuristic pool is defined, the mathematical formulations for the MAB algorithms are presented, the workload fingerprinting and multi-objective reward model are explained, and the statistical evaluation protocol is outlined.
 
 \subsection{Problem Formalization and System Model}
 Cloud task scheduling is modelled as a dynamic mapping problem where a stream of tasks $T = \{t_1, t_2, \dots, t_N\}$ arrives at an orchestration engine and must be mapped to a heterogeneous virtual machine pool $V = \{v_1, v_2, \dots, v_M\}$. Each VM $v_j$ is defined by its processing capacity $P_j$ (in Million Instructions Per Second, MIPS), operational cost rate $C_j$ (\$/s), and baseline power draw. Each task $t_i$ carries a length $L_i$ (in Million Instructions, MI) and memory requirement.
 
-Instead of assigning tasks to VMs directly via low-level state space search, the hyper-heuristic operates at a higher abstraction level. Execution proceeds in batch decision rounds $k \in \{1, 2, \dots, K\}$. At round $k$, a workload batch $B_k \subset T$ arrives. The hyper-heuristic controller selects a Low-Level Heuristic (LLH) $a_k \in \mathcal{A}$ from a predefined pool of $K_{arms} = 9$ candidate algorithms. The selected arm $a_k$ generates a schedule mapping $B_k$ across $V$, which is then executed on the CloudSim Plus simulation backend. Upon completion, the backend returns batch execution metrics, which the hyper-heuristic transforms into a scalar reward $R_k \in [-1, 1]$ to update the bandit's internal Q-values.
+Execution proceeds in batch decision rounds $k \in \{1, 2, \dots, K\}$. At round $k$, a workload batch $B_k \subset T$ arrives. The hyper-heuristic controller selects a Low-Level Heuristic (LLH) $a_k \in \mathcal{A}$ from a predefined pool of $K_{arms} = 9$ candidate algorithms. The selected arm $a_k$ generates a schedule mapping $B_k$ across $V$, which is then executed on the CloudSim Plus simulation backend. Upon completion, the backend returns batch execution metrics, which the hyper-heuristic transforms into a scalar reward $R_k \in [-1, 1]$ to update the bandit's internal Q-values.
 
 \subsection{Low-Level Heuristic Pool}
 The action space $\mathcal{A}$ comprises nine diverse low-level heuristics spanning classical list schedulers, local search methods, and meta-heuristics:
@@ -18,7 +18,7 @@ The action space $\mathcal{A}$ comprises nine diverse low-level heuristics spann
     \item \textbf{HEFT (Heterogeneous Earliest Finish Time):} Prioritizes tasks using upward rank values based on average computation and communication costs, assigning tasks to VMs yielding the earliest finish time.
     \item \textbf{PEFT (Predicting Earliest Finish Time):} Extends HEFT by incorporating an Optimistic Cost Table (OCT) to evaluate downstream path impact during task assignment.
     \item \textbf{Min-Min:} Assigns small tasks first to resources that execute them fastest, minimizing overall batch completion times when small jobs dominate.
-    \item \textbf{Max-Min:} Prioritizes large tasks first to prevent long-tail jobs from monopolizing compute resources toward the end of execution.
+    \item \textbf{Max-Min:} Prioritizes large tasks first to prevent longer duration jobs from monopolizing compute resources toward the end of execution.
     \item \textbf{Round-Robin:} A deterministic baseline distributing tasks sequentially across active VMs regardless of task length or node capacity.
     \item \textbf{Sufferage:} Assigns tasks based on sufferage value (the difference between a task's second-earliest and earliest finish times), prioritizing tasks that face the greatest penalty if delayed.
     \item \textbf{HEFT with Duplication (HEFT-TD):} Duplicates critical predecessor tasks on redundant VM idle slots to eliminate inter-task communication latency.
@@ -77,7 +77,7 @@ For each arriving batch $B_k$, we compute the Coefficient of Variation ($\text{C
 \begin{equation}
 \text{CoV}_k = \frac{\sigma(B_k)}{\mu(B_k)} = \frac{\sqrt{\frac{1}{|B_k|} \sum_{i \in B_k} (L_i - \bar{L})^2}}{\bar{L}}
 \end{equation}
-High $\text{CoV}_k$ indicates heavy-tailed task distributions with high runtime variance, whereas low $\text{CoV}_k$ signifies uniform task profiles. The dynamic exploration weight $\epsilon_k$ or confidence scaling factor $c_k$ is modulated on the fly according to trace volatility:
+High $\text{CoV}_k$ indicates compute-heavy task distributions with high runtime variance, whereas low $\text{CoV}_k$ signifies uniform task profiles. The dynamic exploration weight $\epsilon_k$ or confidence scaling factor $c_k$ is modulated on the fly according to trace volatility:
 \begin{equation}
 c_k = c_0 \cdot \left(1 + \tanh(\text{CoV}_k - \text{CoV}_{\text{baseline}})\right)
 \end{equation}
@@ -106,7 +106,7 @@ To ensure rigorous empirical evaluation \citep{Zhao2025Scheduling}, our experime
 \subsubsection{Trace Datasets}
 We evaluate the system using two real-world high-performance computing workload traces from the Parallel Workloads Archive:
 \begin{itemize}
-    \item \textbf{HPC2N Trace:} High volatility trace ($\text{CoV} \approx 2.52$) containing long-tail execution profiles and heavy resource demands.
+    \item \textbf{HPC2N Trace:} High volatility trace ($\text{CoV} \approx 2.52$) containing long execution profiles and heavy resource demands.
     \item \textbf{NASA Ames iPSC/860 Trace:} Shorter duration scale trace with dynamic arrival bursts and high arrival density.
 \end{itemize}
 
@@ -120,4 +120,4 @@ Post-processing computes cumulative and rolling mean metrics over a sliding wind
 \begin{equation}
 \bar{R}_k = \frac{1}{W} \sum_{i=k-W+1}^{k} R_i
 \end{equation}
-We report the mean $\mu$ and standard deviation $\sigma$ across all 10 seeds. To confirm statistical significance between MAB variants and static baselines, we apply two-tailed Paired Student's $t$-tests and Wilcoxon Signed-Rank tests with a significance threshold of $\alpha = 0.05$.
+We report the mean $\mu$ and standard deviation $\sigma$ across all 10 seeds. To confirm statistical significance between MAB variants and static baselines, we apply two Paired Student's $t$-tests and Wilcoxon Signed-Rank tests with a significance threshold of $\alpha = 0.05$.

@@ -1,7 +1,7 @@
 \section{Evaluation}
-\label{sec:evaluation}
+\label{sec:Evaluation}
 
-This section presents a comprehensive empirical evaluation of our dynamic Multi-Armed Bandit (MAB) hyper-heuristic framework evaluated against real-world HPC workload traces from HPC2N and NASA Ames iPSC/860. We examine policy evolution dynamics, cumulative makespan trajectories, multi-objective trade-off profiles, and cross-algorithm selection heatmaps. We contextualize these empirical results within current literature, present a critical appraisal of system limitations, and propose targeted design refinements.
+This section presents a comprehensive empirical evaluation of our dynamic Multi-Armed Bandit (MAB) hyper-heuristic framework evaluated against real-world HPC workload traces from HPC2N and NASA Ames iPSC/860. We examine policy evolution dynamics, cumulative makespan trajectories, multi-objective trade-off profiles, and cross-algorithm selection heatmaps.
 
 \subsection{Experimental Results and Comparative Analysis}
 
@@ -278,7 +278,7 @@ To ensure complete transparency, we identify three methodological limitations of
 The exploration factor $c = \sqrt{2}$ in UCB1 and discount factor $\gamma = 0.95$ in Discounted UCB were fixed globally. While effective for HPC2N, fixed parameters can lead to prolonged exploration phases on uniform traces like NASA Ames, temporarily favoring sub-optimal heuristics.
 
 \subsubsection{Simulation Idealization vs. Real-World Cloud Dynamics}
-CloudSim Plus models discrete execution deterministically. Real-world edge-cloud environments introduce network jitter, VM cold-start latencies, and hypervisor resource contention, which can introduce variance into heuristic execution times.
+CloudSim Plus models discrete execution deterministically. Real-world cloud environments introduce network jitter, VM cold-start latencies, and hypervisor resource contention, which can introduce variance into heuristic execution times.
 
 \subsubsection{Coarse Granularity of Decision Horizons}
 Evaluating performance at batch boundaries hides task-level variations within a batch. Extremely long tasks can delay reward feedback, temporarily slowing policy adaptation.

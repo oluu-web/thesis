@@ -6,13 +6,13 @@
 \label{sec:Conclusion}
 %% ==================
 \subsection{Restatement of Research Question and Objectives}
-Modern edge-cloud computing environments are characterized by severe non-stationarity, highly dynamic task arrival patterns, and conflicting operational objectives spanning execution delay, financial cost, carbon emissions, and virtual machine utilization. Standard static scheduling heuristics and unconstrained metaheuristics fail to provide consistent trade-offs across fluctuating workloads. To address this challenge, this study investigated the central research question:
+Modern edge-cloud computing environments are characterized by severe non-stationarity, highly dynamic task arrival patterns, and conflicting operational objectives spanning execution delay, financial cost, carbon emissions, and virtual machine utilization. Standard static scheduling heuristics fail to provide consistent trade-offs across fluctuating workloads. To address this challenge, this study investigated the central research question:
 
 \begin{quote}
 \textit{Can an adaptive Multi-Armed Bandit (MAB) hyper-heuristic framework dynamically select optimal low-level scheduling algorithms in real-time to optimize multi-objective execution performance under non-stationary HPC workload conditions, without requiring prior workload profile knowledge?}
 \end{quote}
 
-To answer this question, our research pursued three core objectives:
+In order to answer this question, our research pursued three core objectives:
 \begin{enumerate}
     \item \textbf{Framework Architecture \& Integration:} Formulate a modular hyper-heuristic scheduling engine that integrates diverse low-level heuristics (list schedulers, local search metaheuristics, and hybrid scheduling techniques) into an active arm pool.
     \item \textbf{Dynamic Reward and Policy Modeling:} Design a multi-objective scalarized reward metric encapsulating Makespan, Cost, Carbon Footprint, and VM Utilization, and evaluate four online MAB action-selection policies ($\epsilon$-Greedy, UCB1, Discounted UCB, and Thompson Sampling) to manage non-stationary regret trade-offs.
@@ -31,7 +31,7 @@ We implemented and evaluated the proposed MAB hyper-heuristic framework across 1
 
 \subsection{Implications, Efficacy, and Methodological Limitations}
 \subsubsection{Research Implications and Efficacy}
-The primary efficacy of this research lies in proving that \textit{meta-learning via upper-level bandit abstraction} provides an efficient middle ground between fast-but-rigid list heuristics and effective-but-expensive metaheuristics. By operating at the hyper-heuristic decision level, the framework eliminates the need for manual heuristic tuning or offline model pre-training. For cloud infrastructure providers, this translates to automated workload adaptivity, improved SLA compliance, reduced carbon intensity, and minimized energy overhead without sacrificing operational throughput.
+The primary efficacy of this research lies in proving that \textit{meta-learning via upper-level bandit abstraction} provides an efficient middle ground between fast-but-rigid list heuristics and effective-but-expensive metaheuristics. By operating at the hyper-heuristic level, the framework eliminates the need for manual heuristic tuning or offline model pre-training. For cloud infrastructure providers, this translates to automated workload adaptivity, improved SLA compliance, and reduced carbon intensity without sacrificing operational throughput.
 
 \subsubsection{Limitations}
 Despite its empirical efficacy, the study has three primary methodological limitations:
