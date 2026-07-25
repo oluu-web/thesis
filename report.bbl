@@ -1,0 +1,92 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Adil et~al.]{Adil, Nabi, Aleem, Diaz \harvardand\ Lin}{2022}{Adil2022scp}
+Adil, M., Nabi, S., Aleem, M., Diaz, V.~G. \harvardand\ Lin, J.~C.  \harvardyearleft 2022\harvardyearright .
+\newblock <scp>ca‐mlbs</scp>: Content‐aware machine learning based load balancing scheduler in the cloud environment, {\em Expert Systems} {\bf 40}(4).
+
+\harvarditem[Alkaam et~al.]{Alkaam, Sultan, Hussin \harvardand\ Sharif}{2025}{Alkaam2025Hybrid}
+Alkaam, N.~O., Sultan, M., Hussin, M. \harvardand\ Sharif, K.~Y.  \harvardyearleft 2025\harvardyearright .
+\newblock Hybrid henry gas-harris hawks comprehensive-opposition algorithm for task scheduling in cloud computing, {\em IEEE Access} pp.~1--1.
+
+\harvarditem[Arora et~al.]{Arora, Devi, Eilam, Goyal, Narayanaswami \harvardand\ Parida}{2023}{Arora2023Towards}
+Arora, R., Devi, U., Eilam, T., Goyal, A., Narayanaswami, C. \harvardand\ Parida, P.  \harvardyearleft 2023\harvardyearright .
+\newblock Towards carbon footprint management in hybrid multicloud, {\em Proceedings of the 2nd workshop on sustainable computer systems} pp.~1--7.
+
+\harvarditem[Bal et~al.]{Bal, Mohapatra, Das, Srinivasan \harvardand\ Hu}{2022}{Bal2022A}
+Bal, P.~K., Mohapatra, S.~K., Das, T.~K., Srinivasan, K. \harvardand\ Hu, Y.-C.  \harvardyearleft 2022\harvardyearright .
+\newblock A joint resource allocation, security with efficient task scheduling in cloud computing using hybrid machine learning techniques, {\em Sensors (Basel, Switzerland)} {\bf 22}(3).
+\newline\harvardurl{https://eds.p.ebscohost.com/eds/pdfviewer/pdfviewer?vid=0\&sid=2b2c3ba3-fb23-48d6-833f-6c4da057035f\%40redis}
+
+\harvarditem[Chigu et~al.]{Chigu, El-Mahdy, Mokhtar \harvardand\ Elsabrouty}{2024}{Chigu2024A}
+Chigu, J., El-Mahdy, A., Mokhtar, B. \harvardand\ Elsabrouty, M.  \harvardyearleft 2024\harvardyearright .
+\newblock A low-latency edge-cloud serverless computing framework with a multi-armed bandit scheduler, {\em 2024 International Wireless Communications and Mobile Computing (IWCMC)} pp.~1655--1660.
+
+\harvarditem{Choppara \harvardand\ Lokesh}{2025}{Choppara2025Efficient}
+Choppara, P. \harvardand\ Lokesh, B.  \harvardyearleft 2025\harvardyearright .
+\newblock Efficient task scheduling and load balancing in fog computing for crucial healthcare through deep reinforcement learning, {\em IEEE access} {\bf 13}:~26542--26563.
+
+\harvarditem[Daid et~al.]{Daid, Kumar, Hu \harvardand\ Chen}{2021}{Daid2021An}
+Daid, R., Kumar, Y., Hu, Y.-C. \harvardand\ Chen, W.-L.  \harvardyearleft 2021\harvardyearright .
+\newblock An effective scheduling in data centres for efficient cpu usage and service level agreement fulfilment using machine learning, {\em Connection Science} {\bf 33}(4):~954--974.
+
+\harvarditem{De~Carvalho \harvardand\ Sichman}{2025}{DeCarvalho2025Toward}
+De~Carvalho, V.~R. \harvardand\ Sichman, J.~S.  \harvardyearleft 2025\harvardyearright .
+\newblock Toward cost-efficiency and reduced carbon footprint: A multi-armed bandit hyper-heuristic for cloud scheduling problems, {\em IEEE Access} {\bf 13}:~204656--204675.
+
+\harvarditem[Fan et~al.]{Fan, Zhao, Liu, Su, Li, Wu \harvardand\ Liu}{2024}{Fan2024Collaborative}
+Fan, W., Zhao, L., Liu, X., Su, Y., Li, S., Wu, F. \harvardand\ Liu, Y.  \harvardyearleft 2024\harvardyearright .
+\newblock Collaborative service placement, task scheduling, and resource allocation for task offloading with edge-cloud cooperation, {\em IEEE transactions on mobile computing} {\bf 23}(1):~238--256.
+
+\harvarditem{Hosseini~Shirvani \harvardand\ Noorian~Talouki}{2021}{HosseiniShirvani2021A}
+Hosseini~Shirvani, M. \harvardand\ Noorian~Talouki, R.  \harvardyearleft 2021\harvardyearright .
+\newblock A novel hybrid heuristic-based list scheduling algorithm in heterogeneous cloud computing environment for makespan optimization, {\em Parallel Computing} {\bf 108}:~102828.
+
+\harvarditem[Jun et~al.]{Jun, Haiyang, Xiumei, Kang, Long, Le \harvardand\ Wen}{2025}{Jun2025Mobility}
+Jun, L., Haiyang, S., Xiumei, D., Kang, W., Long, S., Le, L. \harvardand\ Wen, C.  \harvardyearleft 2025\harvardyearright .
+\newblock Mobility-aware user scheduling in wireless federated learning with contextual multi-armed bandit, {\em China Communications} {\bf 22}(11):~256--272.
+
+\harvarditem[Khan et~al.]{Khan, Shah, Jan, Ahmad \harvardand\ Whangbo}{2025}{Khan2025Machine}
+Khan, F., Shah, I., Jan, S., Ahmad, S. \harvardand\ Whangbo, T.  \harvardyearleft 2025\harvardyearright .
+\newblock Machine learning-based resource management in fog computing: A systematic literature review, {\em Sensors} {\bf 25}(3):~687.
+
+\harvarditem{Kumar \harvardand\ Rai}{2021}{Kumar2021Implementation}
+Kumar, A. \harvardand\ Rai, D.  \harvardyearleft 2021\harvardyearright .
+\newblock Implementation of machine learning algorithm for task scheduling in cloud computing environment, {\em Turkish Online Journal of Qualitative Inquiry (TOJQI)} {\bf 12}(6):~5201--5209.
+
+\harvarditem[Laili et~al.]{Laili, Guo, Ren, Li, Li \harvardand\ Zhang}{2023}{Laili2023Parallel}
+Laili, Y., Guo, F., Ren, L., Li, X., Li, Y. \harvardand\ Zhang, L.  \harvardyearleft 2023\harvardyearright .
+\newblock Parallel scheduling of large-scale tasks for industrial cloud–edge collaboration, {\em IEEE internet of Things journal} {\bf 10}(4):~3231--3242.
+
+\harvarditem[Liang et~al.]{Liang, Liu, Song, Yin \harvardand\ Wang}{2026}{Liang2026Joint}
+Liang, H., Liu, C., Song, Y., Yin, Z. \harvardand\ Wang, G.  \harvardyearleft 2026\harvardyearright .
+\newblock Joint two stage beamforming and user scheduling for leo satellite communications via hierarchical multi-armed bandit, {\em IEEE Transactions on Cognitive Communications and Networking} {\bf 12}:~1918--1932.
+
+\harvarditem[Mathew et~al.]{Mathew, Sekaran \harvardand\ Jose}{2014}{Mathew2014Study}
+Mathew, T., Sekaran, K.~C. \harvardand\ Jose, J.  \harvardyearleft 2014\harvardyearright .
+\newblock Study and analysis of various task scheduling algorithms in the cloud computing environment, {\em 2014 International Conference on Advances in Computing, Communications and Informatics (ICACCI)} .
+
+\harvarditem{Saurav \harvardand\ Benedict}{2021}{Saurav2021A}
+Saurav, S.~K. \harvardand\ Benedict, S.  \harvardyearleft 2021\harvardyearright .
+\newblock A taxonomy and survey on energy-aware scientific workflows scheduling in large-scale heterogeneous architecture, {\em 2021 6Th international conference on inventive computation technologies (icict)} pp.~820--826.
+
+\harvarditem[Singh et~al.]{Singh, Chakraborty, Gourisaria, Swain, Raj \harvardand\ Bandyopadhyay}{2024}{Singh2024Leveraging}
+Singh, S., Chakraborty, S., Gourisaria, M.~K., Swain, S., Raj, R. \harvardand\ Bandyopadhyay, A.  \harvardyearleft 2024\harvardyearright .
+\newblock Leveraging multi-armed bandits for cloud resource optimization, {\em 2024 First International Conference on Software, Systems and Information Technology (SSITCON)} pp.~1--6.
+
+\harvarditem{Sravan \harvardand\ Shaik}{2026}{Sravan2026DRL}
+Sravan, P. \harvardand\ Shaik, M.~A.  \harvardyearleft 2026\harvardyearright .
+\newblock Drl-based multi-objective task scheduling for edge-cloud computing: Latency, energy, and sla optimisation, {\em Scientific reports} {\bf 16}(1).
+
+\harvarditem{Tran-Dang \harvardand\ Kim}{2024}{Tran-Dang2024Parallel}
+Tran-Dang, H. \harvardand\ Kim, D.-S.  \harvardyearleft 2024\harvardyearright .
+\newblock Parallel computation in dynamic fog computing networks: A multi-armed bandit learning-based decentralized matching approach, {\em 2024 IEEE International Conference on Joint Cloud Computing (JCC)} pp.~57--60.
+
+\harvarditem{Yadav \harvardand\ Mishra}{2025}{Yadav2025Energy}
+Yadav, M. \harvardand\ Mishra, A.  \harvardyearleft 2025\harvardyearright .
+\newblock Energy-efficient workflow scheduling using dynamic task clustering for sustainable cloud computing, {\em Discover computing} {\bf 28}(1).
+
+\harvarditem[Zhao et~al.]{Zhao, Wang, Yang, Zhang, Wu, Zhong, Han, Huang, Zhang \harvardand\ Zhao}{2025}{Zhao2025Scheduling}
+Zhao, N., Wang, H., Yang, F., Zhang, J., Wu, R., Zhong, T., Han, S., Huang, Z., Zhang, X. \harvardand\ Zhao, X.  \harvardyearleft 2025\harvardyearright .
+\newblock Scheduling virtual machines and containers: A comparative review of techniques, performance, and future trends, {\em Journal of Systems Architecture} {\bf 168}:~103583--103583.
+
+\end{thebibliography}

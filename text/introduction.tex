@@ -1,0 +1,32 @@
+%% introduction.tex
+%%
+
+%% ==============================
+\section{Introduction}
+\label{sec:Introduction}
+\subsection{Background and Motivation}
+Cloud computing datacenters serve as the backbone of modern digital infrastructure, processing massive streams of diverse workloads every second. Managing these resources requires efficient task scheduling to assign arriving tasks to heterogeneous Virtual Machines (VMs) without violating execution constraints or underutilizing hardware. However, finding an optimal schedule in a heterogeneous cloud environment is a well-known NP-hard optimization problem. As system scale increases and workload dynamics shift, traditional scheduling strategies struggle to maintain performance.
+
+This challenge has intensified with the recent rise of artificial intelligence (AI) and machine learning (ML) workloads. The rapid adoption of generative AI, large language models, and continuous deep learning pipelines has created unprecedented demand for cloud compute infrastructure. Datacenters now face dense batch jobs, erratic compute spikes, and heterogeneous hardware requirements that combine memory-bound and compute-heavy tasks. This surging compute demand drives up operational costs and drastically increases energy consumption and carbon emissions. Consequently, modern datacenter managers must balance multi-objective trade-offs, aiming to minimize makespan and financial costs while simultaneously curbing carbon footprints and maintaining high VM utilization.
+
+\subsection{Problem Statement}
+Static Low-Level Heuristics (LLHs) like Heterogeneous Earliest Finish Time (HEFT), PEFT, Min-Min, and Sufferage rely on fixed rules about task characteristics and resource availability. For instance, Min-Min performs well when short tasks dominate, but causes severe head-of-line blocking when large, resource-intensive jobs enter the queue. Meta-heuristics like Simulated Annealing and evolutionary algorithms can explore complex search spaces effectively, but their high computational complexity makes them too slow for fast streaming workloads.
+
+Compounding these issues, cloud environments are inherently non-stationary. Workload arrival rates change rapidly, trace volatility fluctuates, and unexpected infrastructure faults or virtual machine drops can suddenly slice processing capacity. Static scheduling rules cannot adapt on the fly when these environmental disruptions happen. When an algorithm fails to adjust to shifting conditions, the datacenter suffers from resource underutilization, higher operational expenditure, and avoidable carbon emissions.
+
+\subsection{Proposed Solution}
+This dissertation presents a dynamic Multi-Armed Bandit (MAB) hyper-heuristic framework for cloud task scheduling. Instead of searching the task-to-VM space directly, the hyper-heuristic works at a higher level of abstraction: it dynamically selects the best-performing low-level heuristic from a pool of nine diverse algorithms based on real-time execution feedback.
+
+The framework pairs a high-level Python decision engine with a CloudSim Plus simulation engine using persistent standard I/O streaming pipes. To handle volatile and non-stationary conditions, we evaluate four distinct MAB algorithms: $\epsilon$-Greedy, Standard UCB1, Discounted UCB (D-UCB), and Scaled Thompson Sampling. The framework integrates a workload fingerprinting mechanism that uses the Coefficient of Variation ($\text{CoV}$) to measure trace volatility continuously. It also uses a batch-relative, multi-objective reward function that squashes execution metrics into a balanced signal combining makespan, monetary cost, carbon emissions, and VM utilization.
+
+\subsection{Key Contributions}
+The main contributions of this dissertation are:
+\begin{itemize}
+    \item \textbf{Decoupled Hyper-Heuristic Architecture:} We build a lightweight, streaming Python-CloudSim Plus framework that selects low-level heuristics dynamically without interrupting execution streams.
+    \item \textbf{Non-Stationary Adaptation under Failure:} We demonstrate that Discounted UCB outperforms standard bandit variants during abrupt system failures, pivoting its policy from computationally intensive meta-heuristics to PEFT within 10 rounds after a 90\% VM capacity loss.
+    \item \textbf{Multi-Objective Carbon-Aware Reward Model:} We design a batch-relative reward function using a hyperbolic tangent ($\tanh$) transformation to balance makespan, financial cost, carbon emissions, and resource utilization without scale distortion.
+    \item \textbf{Trace-Driven Empirical Validation:} We evaluate our framework using real-world HPC2N and NASA workload traces across 10-seed multi-seed runs, achieving up to a 34.3\% reduction in both monetary costs and carbon footprint compared to traditional baselines.
+\end{itemize}
+
+\subsection{Report Structure}
+The rest of this report is organized as follows: Section~\ref{sec:rw} reviews related literature on cloud task scheduling, multi-armed bandits, and sustainable hyper-heuristics. Section~\ref{sec:Methodology} provides the theoretical foundation for our MAB formulations and reward functions. Section~\ref{sec:Design} presents the system design and pipeline architecture. Section~\ref{sec:Implementation} details the software implementation and IPC integration. Section~\ref{sec:Evaluation} presents experimental results, sensitivity analyses, and statistical evaluations. Finally, Section~\ref{sec:Conclusion} concludes the report and discusses directions for future work.
