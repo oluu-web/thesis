@@ -11,7 +11,7 @@ This section describes the final implementation of the dynamic Multi-Armed Bandi
 \subsection{Technology Stack and Software Architecture}
 The framework uses a two-tier software architecture built on two primary programming environments:
 \begin{itemize}
-    \item \textbf{Python Execution Engine (v3.11):} Serves as the primary control plane; housing the multi-armed bandit decision algorithms, workload trace ingestion module, statistical workload fingerprinter, and batch-relative reward transformer. It uses \texttt{NumPy} and \texttt{SciPy} for vectorized statistical operations and \texttt{Pandas} for trace parsing.
+    \item \textbf{Python Execution Engine (v3.11.7):} Serves as the primary control plane; housing the multi-armed bandit decision algorithms, workload trace ingestion module, statistical workload fingerprinter, and batch-relative reward transformer. It uses \texttt{NumPy} and \texttt{SciPy} for vectorized statistical operations and \texttt{Pandas} for trace parsing.
     \item \textbf{Java Simulation Engine (OpenJDK 21 / CloudSim Plus v7.3.0):} Acts as the discrete-event cloud execution backend. We extended CloudSim Plus core classes to support dynamic low-level heuristic instantiation, dynamic VM status manipulation, real-time energy calculation, and streaming I/O serialization.
 \end{itemize}
 
@@ -45,8 +45,8 @@ To evaluate multi-objective trade-offs accurately, custom tracking modules were 
     \end{equation}
 \end{itemize}
 
-\subsection{Non-Stationary Infrastructure Fault Injection}
-An automated fault injection component was implemented inside the Java backend to simulate physical infrastructure failure. The module monitors batch completion counters; upon reaching Round 50, it triggers a dynamic capacity drop event. The component deactivates 7 out of the 8 provisioned virtual machines, forcing all remaining incoming task streams onto a single operational node. This induces an immediate, severe resource bottleneck, testing the MAB algorithms' capacity to identify and adapt to sudden policy shifts.
+% \subsection{Non-Stationary Infrastructure Fault Injection}
+% An automated fault injection component was implemented inside the Java backend to simulate physical infrastructure failure. The module monitors batch completion counters; upon reaching Round 50, it triggers a dynamic capacity drop event. The component deactivates 7 out of the 8 provisioned virtual machines, forcing all remaining incoming task streams onto a single operational node. This induces an immediate, severe resource bottleneck, testing the MAB algorithms' capacity to identify and adapt to sudden policy shifts.
 
 \subsection{Generated Outputs and Data Transformation}
 The execution pipeline produces three main structured artefacts for post-hoc analysis:

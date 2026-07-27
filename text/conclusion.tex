@@ -2,57 +2,68 @@
 %%
 
 %% ==================
+% \section{Conclusion and Future Work}
+% \label{sec:Conclusion}
+% %% ==================
+% \subsection{Restatement of Research Question and Objectives}
+% Modern edge-cloud computing environments are characterized by severe non-stationarity, highly dynamic task arrival patterns, and conflicting operational objectives spanning execution delay, financial cost, carbon emissions, and virtual machine utilization. Standard static scheduling heuristics fail to provide consistent trade-offs across fluctuating workloads. To address this challenge, this study investigated the central research question:
+
+% \begin{quote}
+% \textit{Can an adaptive Multi-Armed Bandit (MAB) hyper-heuristic framework dynamically select optimal low-level scheduling algorithms in real-time to optimize multi-objective execution performance under non-stationary HPC workload conditions, without requiring prior workload profile knowledge?}
+% \end{quote}
+
+% In order to answer this question, our research pursued three core objectives:
+% \begin{enumerate}
+%     \item \textbf{Framework Architecture \& Integration:} Formulate a modular hyper-heuristic scheduling engine that integrates diverse low-level heuristics (list schedulers, local search metaheuristics, and hybrid scheduling techniques) into an active arm pool.
+%     \item \textbf{Dynamic Reward and Policy Modeling:} Design a multi-objective scalarized reward metric encapsulating Makespan, Cost, Carbon Footprint, and VM Utilization, and evaluate four online MAB action-selection policies ($\epsilon$-Greedy, UCB1, Discounted UCB, and Thompson Sampling) to manage non-stationary regret trade-offs.
+%     \item \textbf{Trace-Driven Empirical Validation:} Conduct comprehensive empirical evaluations on realistic discrete-event simulation platforms driven by real-world HPC workload traces (HPC2N and NASA Ames iPSC/860) to measure system stability, adaptation trajectories, and policy selection dynamics.
+% \end{enumerate}
+
+% \subsection{Summary of Work Done and Key Findings}
+% We implemented and evaluated the proposed MAB hyper-heuristic framework across 100 simulation rounds per workload trace. The experimental results demonstrate complete success in addressing the research question and achieving all stated objectives:
+
+% \begin{itemize}
+%     \item \textbf{Superior Trajectory Performance:} On the volatile HPC2N trace, MAB controllers achieved a cumulative makespan reduction of up to $71.4\%$ compared to standalone static heuristics such as \texttt{min\_min}, while consistently outperforming standard list schedulers (\texttt{heft} and \texttt{peft}).
+%     \item \textbf{Prevention of Catastrophic Degradation:} On the highly concurrent NASA Ames trace, the hyper-heuristic engine successfully identified and suppressed unstable single-heuristic modes (e.g., static \texttt{min\_min}, which accumulated over $1.6 \times 10^9$ seconds in makespan), maintaining bounded makespan growth and steady queue processing across all rounds.
+%     \item \textbf{Balanced Multi-Objective Trade-Offs:} Normalized radar evaluation profiles confirmed that MAB policies achieved broad Pareto dominance over individual heuristics, attaining optimal outer-bound scores ($> 0.95$) across Makespan, Cost, Carbon Footprint, and VM Utilization on uniform traces, and balanced operational trade-offs ($0.65$--$0.72$) under volatile arrival spikes.
+%     \item \textbf{Adaptive Selection Evolution:} Policy heatmaps and selection ratio trajectories verified that MAB algorithms dynamically shift selection weight based on trace characteristics—favoring hybrid metaheuristics (\texttt{hghhc}) during volatile bursts on HPC2N, and transitioning toward list schedulers (\texttt{peft}, \texttt{sufferage}) during steady-state processing on NASA Ames.
+% \end{itemize}
+
+% \subsection{Implications, Efficacy, and Methodological Limitations}
+% \subsubsection{Research Implications and Efficacy}
+% The primary efficacy of this research lies in proving that \textit{meta-learning via upper-level bandit abstraction} provides an efficient middle ground between fast-but-rigid list heuristics and effective-but-expensive metaheuristics. By operating at the hyper-heuristic level, the framework eliminates the need for manual heuristic tuning or offline model pre-training. For cloud infrastructure providers, this translates to automated workload adaptivity, improved SLA compliance, and reduced carbon intensity without sacrificing operational throughput.
+
+% \subsubsection{Limitations}
+% Despite its empirical efficacy, the study has three primary methodological limitations:
+% \begin{enumerate}
+%     \item \textbf{Static Memory and Exploration Bounds:} Hyperparameters governing policy exploration (e.g., $c = \sqrt{2}$ in UCB1 and $\gamma = 0.95$ in Discounted UCB) were configured globally. On highly steady traces (such as NASA Ames), unweighted exploration policies (e.g., Thompson Sampling) occasionally incurred unnecessary exploration overhead.
+%     \item \textbf{Simulation Abstraction and Execution Determinism:} While trace-driven CloudSim Plus environments capture discrete-event scheduling dynamics accurately, they do not fully model non-deterministic real-world phenomena such as hypervisor resource contention, transient network jitter, or container cold-start delays.
+%     \item \textbf{Coarse Decision Granularity:} Reward evaluation occurs at batch boundaries ($B_k$). When scheduling long-running, heterogeneous DAG batches, delayed reward signals can slow down upper-level policy adjustments.
+% \end{enumerate}
+
+% \subsection{Proposals for Meaningful Future Work}
+% Rather than simply sweeping platform parameters, follow-up research should focus on structural and architectural advancements:
+
+% \subsubsection{Contextual and State-Aware Hyper-Heuristics (LinUCB / Contextual Bandits)}
+% A natural extension is transitioning from context-free MABs to Contextual Bandits (e.g., LinUCB) or Deep Reinforcement Learning (DRL) hyper-heuristics. By parameterizing the upper-level selector with a real-time state vector
+% \[
+% \boldsymbol{x}_k = \left[ \text{CoV}_k,\ \text{Depth}_{\text{DAG}},\ \text{Heterogeneity}_{\text{Task}},\ \text{Utilization}_{\text{VM}} \right],
+% \]
+% the framework can map workload features directly to low-level heuristics prior to batch execution, accelerating adaptation in rapidly changing environments.
+
+% \subsubsection{Hierarchical and Federated Edge-Cloud Scheduling Architectures}
+% Future projects can extend this framework to multi-tier, geo-distributed edge-cloud topologies. A hierarchical hyper-heuristic architecture could deploy localized, lightweight MAB agents at edge nodes for fast, low-latency task placement, combined with a global federated aggregator that periodically synchronizes heuristic value estimates ($Q$-values or Beta distributions) across regions without transmitting raw task data.
+
+% \subsubsection{Physical Testbed Implementation and Commercialization Potential}
+% To realize the commercial potential of this research, the hyper-heuristic engine can be productized as a custom control-plane plugin for production orchestrators like Kubernetes (e.g., a custom K8s \texttt{kube-scheduler} or Volcano batch scheduling plugin). Evaluating the engine on a physical multi-region cloud testbed (e.g., AWS EKS or OpenShift) will allow researchers to quantify real-world trade-offs between scheduling computation overhead, API latencies, and actual cloud billing reductions under live industry workloads.
+
 \section{Conclusion and Future Work}
-\label{sec:Conclusion}
-%% ==================
-\subsection{Restatement of Research Question and Objectives}
-Modern edge-cloud computing environments are characterized by severe non-stationarity, highly dynamic task arrival patterns, and conflicting operational objectives spanning execution delay, financial cost, carbon emissions, and virtual machine utilization. Standard static scheduling heuristics fail to provide consistent trade-offs across fluctuating workloads. To address this challenge, this study investigated the central research question:
+\label{sec:conclusion}
 
-\begin{quote}
-\textit{Can an adaptive Multi-Armed Bandit (MAB) hyper-heuristic framework dynamically select optimal low-level scheduling algorithms in real-time to optimize multi-objective execution performance under non-stationary HPC workload conditions, without requiring prior workload profile knowledge?}
-\end{quote}
+This study investigated whether an adaptive Multi-Armed Bandit (MAB) hyper-heuristic framework could dynamically select low-level scheduling heuristics in real time to optimize multi-objective performance across non-stationary HPC workload traces, without requiring prior workload profile knowledge. To address this, we developed a modular scheduling architecture incorporating list-based schedulers, local search metaheuristics, and hybrid algorithms, evaluated under four online decision policies ($\epsilon$-Greedy, UCB1, Discounted UCB, and Thompson Sampling). Utilizing a scalarized multi-objective reward metric accounting for Makespan, Cost, Carbon Footprint, and VM Utilization, extensive trace-driven simulations on CloudSim Plus confirmed the framework's success. On the volatile HPC2N trace, MAB controllers achieved up to a $71.4\%$ cumulative makespan reduction over static baselines like \texttt{min\_min}. On the highly concurrent NASA Ames trace, the engine successfully prevented catastrophic queueing delays, maintaining stable schedule execution and broad Pareto dominance across all evaluation metrics.
 
-In order to answer this question, our research pursued three core objectives:
-\begin{enumerate}
-    \item \textbf{Framework Architecture \& Integration:} Formulate a modular hyper-heuristic scheduling engine that integrates diverse low-level heuristics (list schedulers, local search metaheuristics, and hybrid scheduling techniques) into an active arm pool.
-    \item \textbf{Dynamic Reward and Policy Modeling:} Design a multi-objective scalarized reward metric encapsulating Makespan, Cost, Carbon Footprint, and VM Utilization, and evaluate four online MAB action-selection policies ($\epsilon$-Greedy, UCB1, Discounted UCB, and Thompson Sampling) to manage non-stationary regret trade-offs.
-    \item \textbf{Trace-Driven Empirical Validation:} Conduct comprehensive empirical evaluations on realistic discrete-event simulation platforms driven by real-world HPC workload traces (HPC2N and NASA Ames iPSC/860) to measure system stability, adaptation trajectories, and policy selection dynamics.
-\end{enumerate}
+The primary research value of this framework lies in establishing hyper-heuristic MAB selection as a practical compromise between rigid, fast list schedulers and resource-intensive metaheuristics. Operating at the meta-selection level eliminates having to tune the heuristics manually. It also prevents costly offline pre-training, enabling automated adaptability to shifting cloud workloads. However, key limitations remain: globally fixed exploration hyperparameters ($c = \sqrt{2}$, $\gamma = 0.95$) occasionally induced unnecessary exploration overhead on uniform traces, deterministic simulation abstractions omitted real-world cloud dynamics like hypervisor contention and container cold starts, and batch-level reward signals introduced evaluation delay during heterogeneous DAG processing.
 
-\subsection{Summary of Work Done and Key Findings}
-We implemented and evaluated the proposed MAB hyper-heuristic framework across 100 simulation rounds per workload trace. The experimental results demonstrate complete success in addressing the research question and achieving all stated objectives:
+Future research should focus on structural extensions rather than simple parameter sweeps. Transitioning from context-free MABs to Contextual Bandits (e.g., LinUCB) or Deep Reinforcement Learning would allow the selector to map explicit batch feature vectors—such as task heterogeneity and DAG depth—directly to low-level heuristics prior to execution. Furthermore, extending this architecture into a hierarchical, federated framework for geo-distributed edge-cloud topologies would enable low-latency local task placement with global policy synchronization across regions.
 
-\begin{itemize}
-    \item \textbf{Superior Trajectory Performance:} On the volatile HPC2N trace, MAB controllers achieved a cumulative makespan reduction of up to $71.4\%$ compared to standalone static heuristics such as \texttt{min\_min}, while consistently outperforming standard list schedulers (\texttt{heft} and \texttt{peft}).
-    \item \textbf{Prevention of Catastrophic Degradation:} On the highly concurrent NASA Ames trace, the hyper-heuristic engine successfully identified and suppressed unstable single-heuristic modes (e.g., static \texttt{min\_min}, which accumulated over $1.6 \times 10^9$ seconds in makespan), maintaining bounded makespan growth and steady queue processing across all rounds.
-    \item \textbf{Balanced Multi-Objective Trade-Offs:} Normalized radar evaluation profiles confirmed that MAB policies achieved broad Pareto dominance over individual heuristics, attaining optimal outer-bound scores ($> 0.95$) across Makespan, Cost, Carbon Footprint, and VM Utilization on uniform traces, and balanced operational trade-offs ($0.65$--$0.72$) under volatile arrival spikes.
-    \item \textbf{Adaptive Selection Evolution:} Policy heatmaps and selection ratio trajectories verified that MAB algorithms dynamically shift selection weight based on trace characteristics—favoring hybrid metaheuristics (\texttt{hghhc}) during volatile bursts on HPC2N, and transitioning toward list schedulers (\texttt{peft}, \texttt{sufferage}) during steady-state processing on NASA Ames.
-\end{itemize}
-
-\subsection{Implications, Efficacy, and Methodological Limitations}
-\subsubsection{Research Implications and Efficacy}
-The primary efficacy of this research lies in proving that \textit{meta-learning via upper-level bandit abstraction} provides an efficient middle ground between fast-but-rigid list heuristics and effective-but-expensive metaheuristics. By operating at the hyper-heuristic level, the framework eliminates the need for manual heuristic tuning or offline model pre-training. For cloud infrastructure providers, this translates to automated workload adaptivity, improved SLA compliance, and reduced carbon intensity without sacrificing operational throughput.
-
-\subsubsection{Limitations}
-Despite its empirical efficacy, the study has three primary methodological limitations:
-\begin{enumerate}
-    \item \textbf{Static Memory and Exploration Bounds:} Hyperparameters governing policy exploration (e.g., $c = \sqrt{2}$ in UCB1 and $\gamma = 0.95$ in Discounted UCB) were configured globally. On highly steady traces (such as NASA Ames), unweighted exploration policies (e.g., Thompson Sampling) occasionally incurred unnecessary exploration overhead.
-    \item \textbf{Simulation Abstraction and Execution Determinism:} While trace-driven CloudSim Plus environments capture discrete-event scheduling dynamics accurately, they do not fully model non-deterministic real-world phenomena such as hypervisor resource contention, transient network jitter, or container cold-start delays.
-    \item \textbf{Coarse Decision Granularity:} Reward evaluation occurs at batch boundaries ($B_k$). When scheduling long-running, heterogeneous DAG batches, delayed reward signals can slow down upper-level policy adjustments.
-\end{enumerate}
-
-\subsection{Proposals for Meaningful Future Work}
-Rather than simply sweeping platform parameters, follow-up research should focus on structural and architectural advancements:
-
-\subsubsection{Contextual and State-Aware Hyper-Heuristics (LinUCB / Contextual Bandits)}
-A natural extension is transitioning from context-free MABs to Contextual Bandits (e.g., LinUCB) or Deep Reinforcement Learning (DRL) hyper-heuristics. By parameterizing the upper-level selector with a real-time state vector
-\[
-\boldsymbol{x}_k = \left[ \text{CoV}_k,\ \text{Depth}_{\text{DAG}},\ \text{Heterogeneity}_{\text{Task}},\ \text{Utilization}_{\text{VM}} \right],
-\]
-the framework can map workload features directly to low-level heuristics prior to batch execution, accelerating adaptation in rapidly changing environments.
-
-\subsubsection{Hierarchical and Federated Edge-Cloud Scheduling Architectures}
-Future projects can extend this framework to multi-tier, geo-distributed edge-cloud topologies. A hierarchical hyper-heuristic architecture could deploy localized, lightweight MAB agents at edge nodes for fast, low-latency task placement, combined with a global federated aggregator that periodically synchronizes heuristic value estimates ($Q$-values or Beta distributions) across regions without transmitting raw task data.
-
-\subsubsection{Physical Testbed Implementation and Commercialization Potential}
-To realize the commercial potential of this research, the hyper-heuristic engine can be productized as a custom control-plane plugin for production orchestrators like Kubernetes (e.g., a custom K8s \texttt{kube-scheduler} or Volcano batch scheduling plugin). Evaluating the engine on a physical multi-region cloud testbed (e.g., AWS EKS or OpenShift) will allow researchers to quantify real-world trade-offs between scheduling computation overhead, API latencies, and actual cloud billing reductions under live industry workloads.
+% Finally, to realize its commercial potential, the hyper-heuristic engine can be productized as a custom control-plane scheduler plugin for production orchestration platforms such as Kubernetes. Deploying the framework on physical multi-region cloud testbeds will allow future studies to evaluate actual operational cost savings, SLA compliance, and carbon footprint reductions under real-world network latencies and infrastructure overheads.

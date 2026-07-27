@@ -5,7 +5,7 @@
 \section{Methodology}
 \label{sec:Methodology}
 
-Building upon the gaps identified in Section~\ref{sec:rw}, this section expands on the theoretical and empirical methodology underpinning the framework. The problem space is formalized, the low-level heuristic pool is defined, the mathematical formulations for the MAB algorithms are presented, the workload fingerprinting and multi-objective reward model are explained, and the statistical evaluation protocol is outlined.
+% Building upon the gaps identified in Section~\ref{sec:rw}, this section expands on the theoretical and empirical methodology underpinning the framework. The problem space is formalized, the low-level heuristic pool is defined, the mathematical formulations for the MAB algorithms are presented, the workload fingerprinting and multi-objective reward model are explained, and the statistical evaluation protocol is outlined.
 
 \subsection{Problem Formalization and System Model}
 Cloud task scheduling is modelled as a dynamic mapping problem where a stream of tasks $T = \{t_1, t_2, \dots, t_N\}$ arrives at an orchestration engine and must be mapped to a heterogeneous virtual machine pool $V = \{v_1, v_2, \dots, v_M\}$. Each VM $v_j$ is defined by its processing capacity $P_j$ (in Million Instructions Per Second, MIPS), operational cost rate $C_j$ (\$/s), and baseline power draw. Each task $t_i$ carries a length $L_i$ (in Million Instructions, MI) and memory requirement.

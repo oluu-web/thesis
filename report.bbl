@@ -33,10 +33,6 @@ Daid, R., Kumar, Y., Hu, Y.-C. \harvardand\ Chen, W.-L.  \harvardyearleft 2021\h
 De~Carvalho, V.~R. \harvardand\ Sichman, J.~S.  \harvardyearleft 2025\harvardyearright .
 \newblock Toward cost-efficiency and reduced carbon footprint: A multi-armed bandit hyper-heuristic for cloud scheduling problems, {\em IEEE Access} {\bf 13}:~204656--204675.
 
-\harvarditem[Fan et~al.]{Fan, Zhao, Liu, Su, Li, Wu \harvardand\ Liu}{2024}{Fan2024Collaborative}
-Fan, W., Zhao, L., Liu, X., Su, Y., Li, S., Wu, F. \harvardand\ Liu, Y.  \harvardyearleft 2024\harvardyearright .
-\newblock Collaborative service placement, task scheduling, and resource allocation for task offloading with edge-cloud cooperation, {\em IEEE transactions on mobile computing} {\bf 23}(1):~238--256.
-
 \harvarditem{Hosseini~Shirvani \harvardand\ Noorian~Talouki}{2021}{HosseiniShirvani2021A}
 Hosseini~Shirvani, M. \harvardand\ Noorian~Talouki, R.  \harvardyearleft 2021\harvardyearright .
 \newblock A novel hybrid heuristic-based list scheduling algorithm in heterogeneous cloud computing environment for makespan optimization, {\em Parallel Computing} {\bf 108}:~102828.
@@ -52,10 +48,6 @@ Khan, F., Shah, I., Jan, S., Ahmad, S. \harvardand\ Whangbo, T.  \harvardyearlef
 \harvarditem{Kumar \harvardand\ Rai}{2021}{Kumar2021Implementation}
 Kumar, A. \harvardand\ Rai, D.  \harvardyearleft 2021\harvardyearright .
 \newblock Implementation of machine learning algorithm for task scheduling in cloud computing environment, {\em Turkish Online Journal of Qualitative Inquiry (TOJQI)} {\bf 12}(6):~5201--5209.
-
-\harvarditem[Laili et~al.]{Laili, Guo, Ren, Li, Li \harvardand\ Zhang}{2023}{Laili2023Parallel}
-Laili, Y., Guo, F., Ren, L., Li, X., Li, Y. \harvardand\ Zhang, L.  \harvardyearleft 2023\harvardyearright .
-\newblock Parallel scheduling of large-scale tasks for industrial cloud–edge collaboration, {\em IEEE internet of Things journal} {\bf 10}(4):~3231--3242.
 
 \harvarditem[Liang et~al.]{Liang, Liu, Song, Yin \harvardand\ Wang}{2026}{Liang2026Joint}
 Liang, H., Liu, C., Song, Y., Yin, Z. \harvardand\ Wang, G.  \harvardyearleft 2026\harvardyearright .
@@ -80,10 +72,6 @@ Sravan, P. \harvardand\ Shaik, M.~A.  \harvardyearleft 2026\harvardyearright .
 \harvarditem{Tran-Dang \harvardand\ Kim}{2024}{Tran-Dang2024Parallel}
 Tran-Dang, H. \harvardand\ Kim, D.-S.  \harvardyearleft 2024\harvardyearright .
 \newblock Parallel computation in dynamic fog computing networks: A multi-armed bandit learning-based decentralized matching approach, {\em 2024 IEEE International Conference on Joint Cloud Computing (JCC)} pp.~57--60.
-
-\harvarditem{Yadav \harvardand\ Mishra}{2025}{Yadav2025Energy}
-Yadav, M. \harvardand\ Mishra, A.  \harvardyearleft 2025\harvardyearright .
-\newblock Energy-efficient workflow scheduling using dynamic task clustering for sustainable cloud computing, {\em Discover computing} {\bf 28}(1).
 
 \harvarditem[Zhao et~al.]{Zhao, Wang, Yang, Zhang, Wu, Zhong, Han, Huang, Zhang \harvardand\ Zhao}{2025}{Zhao2025Scheduling}
 Zhao, N., Wang, H., Yang, F., Zhang, J., Wu, R., Zhong, T., Han, S., Huang, Z., Zhang, X. \harvardand\ Zhao, X.  \harvardyearleft 2025\harvardyearright .

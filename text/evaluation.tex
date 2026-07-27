@@ -157,80 +157,80 @@ The primary empirical insights include:
     \item \textbf{Exploration Penalty under Thompson Sampling:} On NASA Ames (Figure~\ref{fig:makespan_nasa_thompson}), Thompson Sampling accumulates $8.0 \times 10^8$ seconds makespan, whereas $\epsilon$-Greedy (Figure~\ref{fig:makespan_nasa_epsilon}) terminates at $1.7 \times 10^8$ seconds, demonstrating that persistent posterior sampling can incur unnecessary exploration overhead in steady-state workloads.
 \end{itemize}
 
-\subsubsection{Multi-Objective Radar Profile Analysis}
-Figures~\ref{fig:radar_hpc2n_all} and~\ref{fig:radar_nasa_all} compare normalized multi-objective trade-offs (Makespan, Cost, Carbon Footprint, and VM Utilization) on HPC2N and NASA Ames traces.
+% \subsubsection{Multi-Objective Radar Profile Analysis}
+% Figures~\ref{fig:radar_hpc2n_all} and~\ref{fig:radar_nasa_all} compare normalized multi-objective trade-offs (Makespan, Cost, Carbon Footprint, and VM Utilization) on HPC2N and NASA Ames traces.
 
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{hpc2n_ucb_radar_multimetric.png}
-        \caption{HPC2N -- UCB1}
-        \label{fig:radar_hpc2n_ucb}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{hpc2n_discounted_ucb_radar_multimetric.png}
-        \caption{HPC2N -- Discounted UCB}
-        \label{fig:radar_hpc2n_discounted}
-    \end{subfigure}
-    \vskip\baselineskip
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{hpc2n_thompson_radar_multimetric.png}
-        \caption{HPC2N -- Thompson Sampling}
-        \label{fig:radar_hpc2n_thompson}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{hpc2n_epsilon_radar_multimetric.png}
-        \caption{HPC2N -- $\epsilon$-Greedy}
-        \label{fig:radar_hpc2n_epsilon}
-    \end{subfigure}
-    \caption{Normalized multi-objective performance trade-offs on the HPC2N trace.}
-    \label{fig:radar_hpc2n_all}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{hpc2n_ucb_radar_multimetric.png}
+%         \caption{HPC2N -- UCB1}
+%         \label{fig:radar_hpc2n_ucb}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{hpc2n_discounted_ucb_radar_multimetric.png}
+%         \caption{HPC2N -- Discounted UCB}
+%         \label{fig:radar_hpc2n_discounted}
+%     \end{subfigure}
+%     \vskip\baselineskip
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{hpc2n_thompson_radar_multimetric.png}
+%         \caption{HPC2N -- Thompson Sampling}
+%         \label{fig:radar_hpc2n_thompson}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{hpc2n_epsilon_radar_multimetric.png}
+%         \caption{HPC2N -- $\epsilon$-Greedy}
+%         \label{fig:radar_hpc2n_epsilon}
+%     \end{subfigure}
+%     \caption{Normalized multi-objective performance trade-offs on the HPC2N trace.}
+%     \label{fig:radar_hpc2n_all}
+% \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{nasa_ucb_radar_multimetric.png}
-        \caption{NASA -- UCB1}
-        \label{fig:radar_nasa_ucb}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{nasa_discounted_ucb_radar_multimetric.png}
-        \caption{NASA -- Discounted UCB}
-        \label{fig:radar_nasa_discounted}
-    \end{subfigure}
-    \vskip\baselineskip
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{nasa_thompson_radar_multimetric.png}
-        \caption{NASA -- Thompson Sampling}
-        \label{fig:radar_nasa_thompson}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{nasa_epsilon_radar_multimetric.png}
-        \caption{NASA -- $\epsilon$-Greedy}
-        \label{fig:radar_nasa_epsilon}
-    \end{subfigure}
-    \caption{Normalized multi-objective performance trade-offs on the NASA Ames trace.}
-    \label{fig:radar_nasa_all}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{nasa_ucb_radar_multimetric.png}
+%         \caption{NASA -- UCB1}
+%         \label{fig:radar_nasa_ucb}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{nasa_discounted_ucb_radar_multimetric.png}
+%         \caption{NASA -- Discounted UCB}
+%         \label{fig:radar_nasa_discounted}
+%     \end{subfigure}
+%     \vskip\baselineskip
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{nasa_thompson_radar_multimetric.png}
+%         \caption{NASA -- Thompson Sampling}
+%         \label{fig:radar_nasa_thompson}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{nasa_epsilon_radar_multimetric.png}
+%         \caption{NASA -- $\epsilon$-Greedy}
+%         \label{fig:radar_nasa_epsilon}
+%     \end{subfigure}
+%     \caption{Normalized multi-objective performance trade-offs on the NASA Ames trace.}
+%     \label{fig:radar_nasa_all}
+% \end{figure}
 
-The radar profiles reveal structural trade-offs across algorithm classes:
-\begin{itemize}
-    \item \textbf{Operational Efficiency vs. Search Overhead:} Standalone \texttt{hghhc} achieves optimal internal schedule compaction but exhibits near-zero normalized scores ($< 0.1$) across Cost, Utilization, and Carbon axes due to its high metaheuristic execution overhead.
-    \item \textbf{Balanced Trade-off Envelope:} On NASA Ames (Figure~\ref{fig:radar_nasa_all}), the MAB hyper-heuristics achieve complete outer-bound dominance (normalized scores $> 0.95$ across all four axes), vastly outperforming single heuristics (\texttt{heft} and \texttt{peft} at $\approx 0.52$). On HPC2N (Figure~\ref{fig:radar_hpc2n_all}), MAB formulations maintain balanced scores between $0.65$ and $0.72$, ensuring sustainable resource utilization without incurring single-heuristic vulnerabilities.
-\end{itemize}
+% The radar profiles reveal structural trade-offs across algorithm classes:
+% \begin{itemize}
+%     \item \textbf{Operational Efficiency vs. Search Overhead:} Standalone \texttt{hghhc} achieves optimal internal schedule compaction but exhibits near-zero normalized scores ($< 0.1$) across Cost, Utilization, and Carbon axes due to its high metaheuristic execution overhead.
+%     \item \textbf{Balanced Trade-off Envelope:} On NASA Ames (Figure~\ref{fig:radar_nasa_all}), the MAB hyper-heuristics achieve complete outer-bound dominance (normalized scores $> 0.95$ across all four axes), vastly outperforming single heuristics (\texttt{heft} and \texttt{peft} at $\approx 0.52$). On HPC2N (Figure~\ref{fig:radar_hpc2n_all}), MAB formulations maintain balanced scores between $0.65$ and $0.72$, ensuring sustainable resource utilization without incurring single-heuristic vulnerabilities.
+% \end{itemize}
 
 \subsubsection{Cross-Algorithm Selection Profile Heatmaps}
 Figures~\ref{fig:heatmap_hpc2n} and~\ref{fig:heatmap_nasa} illustrate the aggregate low-level heuristic selection frequency distributions (\%) across all four Multi-Armed Bandit (MAB) controllers on the HPC2N and NASA Ames workload traces, respectively.
@@ -263,13 +263,13 @@ Key selection tendencies across workload domains include:
 \end{enumerate}
 
 
-\subsection{Contextualization with Prior Research}
-Our empirical findings support and expand upon key themes in recent literature:
-\begin{itemize}
-    \item \textbf{Adaptive Heuristic Selection:} Consistent with Hosseini-Shirvani et al., fixed heuristics suffer from structural rigidity across non-stationary traces. Our MAB framework overcomes this by dynamically selecting high-performing heuristics based on real-time feedback.
-    \item \textbf{Non-Stationary Regret Control:} In alignment with non-stationary bandit theory \citep{Singh2024Leveraging, DeCarvalho2025Toward}, exponential history decay in Discounted UCB prevents Q-value stagnation, providing smoother makespan growth compared to unweighted Thompson Sampling.
-    \item \textbf{Resource Overhead Management:} While standalone metaheuristics like \texttt{hghhc} provide high static schedule quality, their unconstrained search incurs high energy costs. Operating at the hyper-heuristic level achieves strong schedule quality while managing overall operational overhead.
-\end{itemize}
+% \subsection{Contextualization with Prior Research}
+% Our empirical findings support and expand upon key themes in recent literature:
+% \begin{itemize}
+%     \item \textbf{Adaptive Heuristic Selection:} Consistent with Hosseini-Shirvani et al., fixed heuristics suffer from structural rigidity across non-stationary traces. Our MAB framework overcomes this by dynamically selecting high-performing heuristics based on real-time feedback.
+%     \item \textbf{Non-Stationary Regret Control:} In alignment with non-stationary bandit theory \citep{Singh2024Leveraging, DeCarvalho2025Toward}, exponential history decay in Discounted UCB prevents Q-value stagnation, providing smoother makespan growth compared to unweighted Thompson Sampling.
+%     \item \textbf{Resource Overhead Management:} While standalone metaheuristics like \texttt{hghhc} provide high static schedule quality, their unconstrained search incurs high energy costs. Operating at the hyper-heuristic level achieves strong schedule quality while managing overall operational overhead.
+% \end{itemize}
 
 \subsection{Critical Appraisal and Methodological Limitations}
 To ensure complete transparency, we identify three methodological limitations of this study:
