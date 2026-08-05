@@ -275,10 +275,17 @@ Key selection tendencies across workload domains include:
 To ensure complete transparency, we identify three methodological limitations of this study:
 
 \subsubsection{Hyperparameter Tuning and Exploration Bounds}
-The exploration factor $c = \sqrt{2}$ in UCB1 and discount factor $\gamma = 0.95$ in Discounted UCB were fixed globally. While effective for HPC2N, fixed parameters can lead to prolonged exploration phases on uniform traces like NASA Ames, temporarily favoring sub-optimal heuristics.
+The exploration factor $c = \sqrt{2}$ in UCB1 and discount factor $\gamma = 0.95$ in Discounted UCB were fixed globally. While effective for HPC2N, fixed parameters can lead to prolonged exploration phases on uniform traces like NASA Ames, temporarily favouring sub-optimal heuristics.
+Optimizing these hyperparameters dynamically makes sure that the scheduler maintains a balance between exploration and exploitation across diverse and non-stationary workloads.
 
 \subsubsection{Simulation Idealization vs. Real-World Cloud Dynamics}
-CloudSim Plus models discrete execution deterministically. Real-world cloud environments introduce network jitter, VM cold-start latencies, and hypervisor resource contention, which can introduce variance into heuristic execution times.
+
+CloudSim Plus models discrete execution deterministically. Real-world cloud environments introduce network jitter, VM cold-start latencies, and hypervisor resource contention, which introduce variance into heuristic execution times.
+
+To bridge the gap between deterministic simulation and physical cloud infrastructure, three architectural extensions can be made: Asynchronous Policy Updates that transition the Upper-Level Multi-Armed Bandit (MAB) engine from discrete batch execution to an asynchronous event-driven loop that updates reward metrics continuously as telemetry streams arrive from live cloud nodes, adaptive reward smoothing that implements an exponential moving average on raw runtime feedback to prevent transient network anomalies from corrupting historical reward distributions and Fallback \& Safety Bounds by Setting hard SLA timeout thresholds that force a deterministic baseline heuristic (e.g., HEFT) if an exploitation arm experiences unexpected physical delay.
+
+Deploying the current system directly onto live cloud infrastructure without these adaptation mechanisms yields predictable performance trade-offs such as an exploration phase delay, a robustness to non-stationary shift and suboptimal fine-grained decisions.
+
 
 \subsubsection{Coarse Granularity of Decision Horizons}
 Evaluating performance at batch boundaries hides task-level variations within a batch. Extremely long tasks can delay reward feedback, temporarily slowing policy adaptation.

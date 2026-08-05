@@ -42,6 +42,50 @@ The Multi-Armed Bandit (MAB) framework provides a theoretically grounded approac
 
 MAB methods have also been applied in related distributed computing contexts. \citet{Tran-Dang2024Parallel} proposed MAB-MATCH, a Thompson Sampling-based MAB combined with matching theory for decentralized parallel task offloading in dynamic fog computing networks, minimizing delay under varying network conditions. \citet{Chigu2024A} proposed a UCB-based MAB scheduler for a two-tier edge-cloud FaaS framework, demonstrating that it converges to near-oracle execution latency on OpenWhisk, AWS Lambda, and Google Cloud Functions. In wireless federated learning, \citet{Jun2025Mobility} proposed a mobility-aware contextual MAB for scheduling mobile users based on latency and energy constraints. For LEO satellite communications, a hierarchical MAB with dual-UCB was proposed by \citet{Liang2026Joint} for joint beamforming and user scheduling.
 
+A detailed taxonomy and feature comparison summarizing the literature alongside the characteristics of our proposed contextual MAB hyper-heuristic framework is presented in Table~\ref{tab:related_work_summary}.
+
+\begin{table}[H]
+\centering
+\caption{Comprehensive Comparison of Literature and Features of the Proposed Work}
+\label{tab:related_work_summary}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{p{3.2cm} p{2.8cm} p{2.5cm} p{2.8cm} p{2.5cm} p{2.2cm} p{2.2cm}}
+\toprule
+\textbf{Study / Work} & \textbf{Methodology / Core Strategy} & \textbf{Optimization Objectives} & \textbf{Target Environment} & \textbf{Dynamic Adaptivity} & \textbf{Context / Feature Awareness} & \textbf{Evaluation Engine} \\
+\midrule
+
+\multicolumn{7}{l}{\textbf{\textit{List-Based \& Classical Heuristics}}} \\
+\citet{HosseiniShirvani2021A} & HH-LiSch (Task duplication \& slot insertion) & Makespan & Cloud VMs & Static / Low & $\times$ & Simulation \\
+\citet{Adil2022scp} & CA-MLBS (SVM + PSO content classification) & Makespan, Throughput & Cloud & Static & $\checkmark$ (Content Type) & CloudSim \\
+
+\midrule
+\multicolumn{7}{l}{\textbf{\textit{Meta-Heuristic \& Hybrid Approaches}}} \\
+\citet{Kumar2021Implementation} & Ant Colony Optimization (ACO) & Execution Time, Failure Rate & Cloud & Moderate & $\times$ & CloudSim \\
+\citet{Alkaam2025Hybrid} & HGHHC (Henry Gas + Harris Hawks + COBL) & Makespan & Heterogeneous Cloud & Moderate & $\times$ & HPC2N / NASA Traces \\
+\citet{Bal2022A} & RATS-HM (Cat Swarm + GO-DNN + Encryption) & Utilization, Power, Security, Latency & Cloud / Edge & Moderate & $\times$ & CloudSim \\
+
+\midrule
+\multicolumn{7}{l}{\textbf{\textit{Machine Learning \& Neural Network Methods}}} \\
+\citet{Daid2021An} & Probabilistic Neural Networks + Linear Regression & CPU Power, Allocation & Cloud Datacenters & High & $\checkmark$ (CPU Load) & MATLAB (10 VMs) \\
+\citet{Sravan2026DRL} & Multi-Objective DRL Framework & Latency, Energy, SLA & Cloud / Fog & High & $\checkmark$ (SLA Bounds) & Simulation \\
+
+\midrule
+\multicolumn{7}{l}{\textbf{\textit{Multi-Armed Bandit (MAB) \& Hyper-Heuristic Schedulers}}} \\
+\citet{Singh2024Leveraging} & Game-Theoretic MAB & Utilization, Latency, Fairness & Dynamic Cloud & High & $\times$ & Cloud Simulator \\
+\citet{DeCarvalho2025Toward} & HHCSP (UCB-MAB + FRRMAB Credit Assignment) & Makespan, Cost, Carbon & Cloud (AWS / Teads) & High & $\times$ & Real AWS Data \\
+\citet{Chigu2024A} & UCB-based MAB Scheduler & Execution Latency & Edge-Cloud FaaS & High & $\times$ & AWS Lambda / OpenWhisk \\
+
+
+
+\midrule
+\rowcolor{gray!15}
+\textbf{Proposed Work} & \textbf{Contextual MAB Hyper-Heuristic (UCB / Discounted-UCB / Thompson) + IPC Bridge} & \textbf{Makespan, Utilization, Non-stationary Regret} & \textbf{Heterogeneous Edge-Cloud} & \textbf{High (Online Adaptive)} & \textbf{$\checkmark$ (Task Graph \& Workload Features)} & \textbf{CloudSim Plus (Java) + Python IPC Bridge} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
 % \subsection{Non-Stationary Bandits in Dynamic Systems}
 % Traditional MAB formulations assume stationary reward distributions, which fails in dynamic cloud infrastructures where node failures or sudden workload shifts occur. \citet{Singh2024Leveraging} established that standard stationary bandit policies like UCB1 accumulate unweighted historical memory, causing high adaptation lag when environmental statistics shift. To overcome this memory bias, non-stationary variants introduce decay factors or sliding windows to prioritize recent performance feedback. Applying discount factors inside upper-confidence bounds allows hyper-heuristic frameworks to rapidly discard stale Q-values when underlying infrastructure capacities drop abruptly. Despite this theoretical potential, evaluating discounted UCB models within online hyper-heuristic cloud schedulers undergoing physical VM capacity failure drops remains underexplored.
 

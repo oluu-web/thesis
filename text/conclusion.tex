@@ -58,7 +58,7 @@
 % To realize the commercial potential of this research, the hyper-heuristic engine can be productized as a custom control-plane plugin for production orchestrators like Kubernetes (e.g., a custom K8s \texttt{kube-scheduler} or Volcano batch scheduling plugin). Evaluating the engine on a physical multi-region cloud testbed (e.g., AWS EKS or OpenShift) will allow researchers to quantify real-world trade-offs between scheduling computation overhead, API latencies, and actual cloud billing reductions under live industry workloads.
 
 \section{Conclusion and Future Work}
-\label{sec:conclusion}
+\label{sec:Conclusion}
 
 This study investigated whether an adaptive Multi-Armed Bandit (MAB) hyper-heuristic framework could dynamically select low-level scheduling heuristics in real time to optimize multi-objective performance across non-stationary HPC workload traces, without requiring prior workload profile knowledge. To address this, we developed a modular scheduling architecture incorporating list-based schedulers, local search metaheuristics, and hybrid algorithms, evaluated under four online decision policies ($\epsilon$-Greedy, UCB1, Discounted UCB, and Thompson Sampling). Utilizing a scalarized multi-objective reward metric accounting for Makespan, Cost, Carbon Footprint, and VM Utilization, extensive trace-driven simulations on CloudSim Plus confirmed the framework's success. On the volatile HPC2N trace, MAB controllers achieved up to a $71.4\%$ cumulative makespan reduction over static baselines like \texttt{min\_min}. On the highly concurrent NASA Ames trace, the engine successfully prevented catastrophic queueing delays, maintaining stable schedule execution and broad Pareto dominance across all evaluation metrics.
 

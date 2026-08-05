@@ -37,6 +37,11 @@ De~Carvalho, V.~R. \harvardand\ Sichman, J.~S.  \harvardyearleft 2025\harvardyea
 Hosseini~Shirvani, M. \harvardand\ Noorian~Talouki, R.  \harvardyearleft 2021\harvardyearright .
 \newblock A novel hybrid heuristic-based list scheduling algorithm in heterogeneous cloud computing environment for makespan optimization, {\em Parallel Computing} {\bf 108}:~102828.
 
+\harvarditem[Jeba et~al.]{Jeba, Roy, Rashid, Atik \harvardand\ Whaiduzzaman}{2019}{Jeba2019Green}
+Jeba, J.~A., Roy, S., Rashid, M.~O., Atik, S.~T. \harvardand\ Whaiduzzaman, M.  \harvardyearleft 2019\harvardyearright .
+\newblock Towards green cloud computing an algorithmic approach for energy minimization in cloud data centers, {\em Int. J. Cloud Appl. Comput.} {\bf 9}(1):~59–81.
+\newline\harvardurl{https://doi.org/10.4018/IJCAC.2019010105}
+
 \harvarditem[Jun et~al.]{Jun, Haiyang, Xiumei, Kang, Long, Le \harvardand\ Wen}{2025}{Jun2025Mobility}
 Jun, L., Haiyang, S., Xiumei, D., Kang, W., Long, S., Le, L. \harvardand\ Wen, C.  \harvardyearleft 2025\harvardyearright .
 \newblock Mobility-aware user scheduling in wireless federated learning with contextual multi-armed bandit, {\em China Communications} {\bf 22}(11):~256--272.
