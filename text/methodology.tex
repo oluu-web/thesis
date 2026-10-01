@@ -8,16 +8,20 @@
 % Building upon the gaps identified in Section~\ref{sec:rw}, this section expands on the theoretical and empirical methodology underpinning the framework. The problem space is formalized, the low-level heuristic pool is defined, the mathematical formulations for the MAB algorithms are presented, the workload fingerprinting and multi-objective reward model are explained, and the statistical evaluation protocol is outlined.
 
 \subsection{Problem Formalization and System Model}
-Cloud task scheduling is modelled as a dynamic mapping problem where a stream of tasks $T = \{t_1, t_2, \dots, t_N\}$ arrives at an orchestration engine and must be mapped to a heterogeneous virtual machine pool $V = \{v_1, v_2, \dots, v_M\}$. Each VM $v_j$ is defined by its processing capacity $P_j$ (in Million Instructions Per Second, MIPS), operational cost rate $C_j$ (\$/s), and baseline power draw. Each task $t_i$ carries a length $L_i$ (in Million Instructions, MI) and memory requirement.
+% Cloud task scheduling is modelled as a dynamic mapping problem where a stream of tasks $T = \{t_1, t_2, \dots, t_N\}$ arrives at an orchestration engine and must be mapped to a heterogeneous virtual machine pool $V = \{v_1, v_2, \dots, v_M\}$. Each VM $v_j$ is defined by its processing capacity $P_j$ (in Million Instructions Per Second, MIPS), operational cost rate $C_j$ (\$/s), and baseline power draw. Each task $t_i$ carries a length $L_i$ (in Million Instructions, MI) and memory requirement.
 
-Execution proceeds in batch decision rounds $k \in \{1, 2, \dots, K\}$. At round $k$, a workload batch $B_k \subset T$ arrives. The hyper-heuristic controller selects a Low-Level Heuristic (LLH) $a_k \in \mathcal{A}$ from a predefined pool of $K_{arms} = 9$ candidate algorithms. The selected arm $a_k$ generates a schedule mapping $B_k$ across $V$, which is then executed on the CloudSim Plus simulation backend. Upon completion, the backend returns batch execution metrics, which the hyper-heuristic transforms into a scalar reward $R_k \in [-1, 1]$ to update the bandit's internal Q-values.
+Task scheduling in the cloud is seen as a problem where tasks arrive at the data center and need to be assigned to a virtual machine. Each virtual machine has a processing capacity which is in Million Instructions per Second (MIPS), an operational cost rate and a baseline power draw. Each task has a size or length in Million Instructions, and a memory requirement.
+
+The tasks are executed in batches. For each batch, a number of tasks arrives, and the scheduler selects a low level heuristic from a predefined pool of algorithms. The selected algorithm then determines the virtual machine each task is assigned to, which is then executed within CloudSim. Once the execution is complete, CloudSim returns netrics which the then transformed into a singular reward within the python program, to update the bandit's Q-values.
+
+% Execution proceeds in batch decision rounds $k \in \{1, 2, \dots, K\}$. At round $k$, a workload batch $B_k \subset T$ arrives. The hyper-heuristic controller selects a Low-Level Heuristic (LLH) $a_k \in \mathcal{A}$ from a predefined pool of $K_{arms} = 9$ candidate algorithms. The selected arm $a_k$ generates a schedule mapping $B_k$ across $V$, which is then executed on the CloudSim Plus simulation backend. Upon completion, the backend returns batch execution metrics, which the hyper-heuristic transforms into a scalar reward $R_k \in [-1, 1]$ to update the bandit's internal Q-values.
 
 \subsection{Low-Level Heuristic Pool}
-The action space $\mathcal{A}$ comprises nine diverse low-level heuristics spanning classical list schedulers, local search methods, and meta-heuristics:
+The low-level heuristic pool consists of nine scheduling algorithms:
 \begin{enumerate}
-    \item \textbf{HEFT (Heterogeneous Earliest Finish Time):} Prioritizes tasks using upward rank values based on average computation and communication costs, assigning tasks to VMs yielding the earliest finish time.
-    \item \textbf{PEFT (Predicting Earliest Finish Time):} Extends HEFT by incorporating an Optimistic Cost Table (OCT) to evaluate downstream path impact during task assignment.
-    \item \textbf{Min-Min:} Assigns small tasks first to resources that execute them fastest, minimizing overall batch completion times when small jobs dominate.
+    \item \textbf{HEFT (Heterogeneous Earliest Finish Time):} Prioritizes tasks using upward rank values and assigning tasks to VMs with the earliest finish time.
+    \item \textbf{PEFT (Predicting Earliest Finish Time):} Extends HEFT by incorporating an Optimistic Cost Table (OCT) to evaluate the downstream path impact.
+    \item \textbf{Min-Min:} Assigns small tasks first to resources that execute them the fastest.
     \item \textbf{Max-Min:} Prioritizes large tasks first to prevent longer duration jobs from monopolizing compute resources toward the end of execution.
     \item \textbf{Round-Robin:} A deterministic baseline distributing tasks sequentially across active VMs regardless of task length or node capacity.
     \item \textbf{Sufferage:} Assigns tasks based on sufferage value (the difference between a task's second-earliest and earliest finish times), prioritizing tasks that face the greatest penalty if delayed.
@@ -40,7 +44,7 @@ a_k = \begin{cases}
 \end{equation}
 where $\epsilon = 0.1$, and $\hat{Q}_k(a)$ is the empirical mean reward of arm $a$ up to round $k$.
 
-\subsubsection{Standard UCB1}
+\subsubsection{Standard UCB}
 Constructs upper confidence bounds based on Hoeffding's Inequality to balance empirical performance and selection uncertainty shown in Equation~\eqref{eq:eqn_2}:
 \begin{equation}
 \label{eq:eqn_2}
@@ -49,7 +53,7 @@ a_k = \arg\max_{a \in \mathcal{A}} \left[ \hat{Q}_k(a) + c \cdot \sqrt{\frac{\ln
 where $N_k(a)$ is the total pull count of arm $a$ up to round $k$, and $c = \sqrt{2}$ is the exploration constant.
 
 \subsubsection{Discounted UCB (D-UCB)}
-To address non-stationary environments where optimal heuristics shift due to infrastructure state changes or workload spikes, D-UCB introduces a discount factor $\gamma \in (0, 1)$ to exponentially decay historical observations \citep{DeCarvalho2025Toward, Singh2024Leveraging} shown in Equations~\eqref{eq:eqn_3} and ~\eqref{eq:eqn_4}:
+Introduces a discount factor $\gamma \in (0, 1)$ to exponentially decay historical observations \citep{DeCarvalho2025Toward, Singh2024Leveraging} shown in Equations~\eqref{eq:eqn_3} and ~\eqref{eq:eqn_4}:
 \begin{equation}
 \label{eq:eqn_3}
 \hat{Q}_k(\gamma, a) = \frac{\sum_{i=1}^{k-1} \gamma^{k-1-i} R_i \mathbb{I}(a_i = a)}{N_k(\gamma, a)}
@@ -66,71 +70,41 @@ a_k = \arg\max_{a \in \mathcal{A}} \left[ \hat{Q}_k(\gamma, a) + 2 B \sqrt{\frac
 where $n_k(\gamma) = \sum_{a \in \mathcal{A}} N_k(\gamma, a)$, $\gamma = 0.95$, $B = 1.0$ represents the reward bound, and $\xi = 0.5$ tunes exploration intensity.
 
 \subsubsection{Scaled Thompson Sampling}
-Maintains continuous probability distributions over expected rewards. Assuming a normalized reward domain $R_k \in [0, 1]$, we model arm success probabilities using Beta distributions $\text{Beta}(\alpha_a, \beta_a)$. At round $k$, sample values $\theta_a \sim \text{Beta}(\alpha_a, \beta_a)$ are drawn for each arm $a \in \mathcal{A}$, and the arm with the maximum sample is selected, shown in Equation~\eqref{eq:eqn_6}:
+Maintains continuous probability distributions over expected rewards. At round $k$, sample values are drawn for each arm $a \in \mathcal{A}$, and the arm with the maximum sample is selected, shown in Equation~\eqref{eq:eqn_6}:
 \begin{equation}
 \label{eq:eqn_6}
 a_k = \arg\max_{a \in \mathcal{A}} \theta_a
 \end{equation}
-Upon receiving continuous reward $R_k \in [0, 1]$, parameters update via Bernoulli trials with success probability $R_k$, shown in Equation~\eqref{eq:eqn_7}:
-\begin{equation}
-\label{eq:eqn_7}
-\alpha_a \leftarrow \alpha_a + R_k, \quad \beta_a \leftarrow \beta_a + (1 - R_k)
-\end{equation}
 
-\subsection{Workload Fingerprinting and Dynamic Exploration Tuning}
-Static exploration parameters fail when workload arrival volatility fluctuates wildly. To make bandit exploration context-aware without incurring deep learning inference overheads \citep{Adil2022scp}, we implement a lightweight statistical workload fingerprinting module.
+% \subsection{Batch-Relative Multi-Objective Reward Function}
+% To evaluate schedule quality without scale distortion across heterogeneous batches, raw metrics—Makespan ($M_k$, seconds), Monetary Cost ($C_k$, \$), Carbon Footprint ($E_k$, kg $\text{CO}_2\text{e}$), and Mean VM Utilization ($U_k \in [0, 1]$)—are converted into batch-relative performance ratios against a baseline schedule $a_{\text{base}}$ (Round-Robin), in Equation~\eqref{eq:eqn_10}:
+% \begin{equation}
+% \label{eq:eqn_10}
+% \Delta M_k = \frac{M_k^{(a_{\text{base}})} - M_k^{(a_k)}}{M_k^{(a_{\text{base}})}}, \quad \Delta C_k = \frac{C_k^{(a_{\text{base}})} - C_k^{(a_k)}}{C_k^{(a_{\text{base}})}}, \quad \Delta E_k = \frac{E_k^{(a_{\text{base}})} - E_k^{(a_k)}}{E_k^{(a_{\text{base}})Sud}}
+% \end{equation}
+% The composite multi-objective metric combines efficiency gains and raw resource utilization, shown in Equation~\eqref{eq:eqn_11}:
+% \begin{equation}
+% \label{eq:eqn_11}
+% S_k = w_1 \Delta M_k + w_2 \Delta C_k + w_3 \Delta E_k + w_4 U_k
+% \end{equation}
+% where weight vector $\boldsymbol{w} = [0.35, 0.25, 0.25, 0.15]$ satisfies $\sum w_i = 1.0$.
 
-For each arriving batch $B_k$, we compute the Coefficient of Variation ($\text{CoV}$) of task lengths $L_i \in B_k$, which we do in Equation~\eqref{eq:eqn_8}:
-\begin{equation}
-\label{eq:eqn_8}
-\text{CoV}_k = \frac{\sigma(B_k)}{\mu(B_k)} = \frac{\sqrt{\frac{1}{|B_k|} \sum_{i \in B_k} (L_i - \bar{L})^2}}{\bar{L}}
-\end{equation}
-High $\text{CoV}_k$ indicates compute-heavy task distributions with high runtime variance, whereas low $\text{CoV}_k$ signifies uniform task profiles. The dynamic exploration weight $\epsilon_k$ or confidence scaling factor $c_k$ is modulated on the fly according to trace volatility, in Equation~\eqref{eq:eqn_9} below:
-\begin{equation}
-\label{eq:eqn_9}
-c_k = c_0 \cdot \left(1 + \tanh(\text{CoV}_k - \text{CoV}_{\text{baseline}})\right)
-\end{equation}
-This auto-tunes hyper-heuristic exploration: during steady uniform arrival streams, the agent exploits known optimal list schedulers; when sudden volatile task spikes arrive, exploration scales up to identify robust meta-heuristic configurations.
+% To ensure stable gradient bounds for bandit updates, $S_k$ is passed through a hyperbolic tangent ($\tanh$) squashing function, mapping scalar performance into a bounded range $R_k \in [-1, 1]$, in Equation~\eqref{eq:eqn_12}:
+% \begin{equation}
+% \label{eq:eqn_12}
+% R_k = \tanh\left( \lambda \cdot S_k \right)
+% \end{equation}
+% where $\lambda = 2.0$ acts as a steepness scaling factor.
 
-\subsection{Batch-Relative Multi-Objective Reward Function}
-To evaluate schedule quality without scale distortion across heterogeneous batches, raw metrics—Makespan ($M_k$, seconds), Monetary Cost ($C_k$, \$), Carbon Footprint ($E_k$, kg $\text{CO}_2\text{e}$), and Mean VM Utilization ($U_k \in [0, 1]$)—are converted into batch-relative performance ratios against a baseline schedule $a_{\text{base}}$ (Round-Robin), in Equation~\eqref{eq:eqn_10}:
-\begin{equation}
-\label{eq:eqn_10}
-\Delta M_k = \frac{M_k^{(a_{\text{base}})} - M_k^{(a_k)}}{M_k^{(a_{\text{base}})}}, \quad \Delta C_k = \frac{C_k^{(a_{\text{base}})} - C_k^{(a_k)}}{C_k^{(a_{\text{base}})}}, \quad \Delta E_k = \frac{E_k^{(a_{\text{base}})} - E_k^{(a_k)}}{E_k^{(a_{\text{base}})Sud}}
-\end{equation}
-The composite multi-objective metric combines efficiency gains and raw resource utilization, shown in Equation~\eqref{eq:eqn_11}:
-\begin{equation}
-\label{eq:eqn_11}
-S_k = w_1 \Delta M_k + w_2 \Delta C_k + w_3 \Delta E_k + w_4 U_k
-\end{equation}
-where weight vector $\boldsymbol{w} = [0.35, 0.25, 0.25, 0.15]$ satisfies $\sum w_i = 1.0$.
-
-To ensure stable gradient bounds for bandit updates, $S_k$ is passed through a hyperbolic tangent ($\tanh$) squashing function, mapping scalar performance into a bounded range $R_k \in [-1, 1]$, in Equation~\eqref{eq:eqn_12}:
-\begin{equation}
-\label{eq:eqn_12}
-R_k = \tanh\left( \lambda \cdot S_k \right)
-\end{equation}
-where $\lambda = 2.0$ acts as a steepness scaling factor.
-
-\subsection{Evaluation Methodology and Statistical Validation}
+\subsection{Evaluation Methodology}
 To ensure rigorous empirical evaluation \citep{Zhao2025Scheduling}, our experimental methodology follows a structured pipeline:
 
 \subsubsection{Trace Datasets}
 We evaluate the system using two real-world high-performance computing workload traces from the Parallel Workloads Archive:
 \begin{itemize}
-    \item \textbf{HPC2N Trace:} High volatility trace ($\text{CoV} \approx 2.52$) containing long execution profiles and heavy resource demands.
+    \item \textbf{HPC2N Trace:} Workload trace containing long execution profiles and heavy resource demands.
     \item \textbf{NASA Ames iPSC/860 Trace:} Shorter duration scale trace with dynamic arrival bursts and high arrival density.
 \end{itemize}
 
 \subsubsection{Non-Stationary Failure Injection}
-To evaluate policy adaptability during infrastructure failure, we simulate an abrupt non-stationary disruption. At Round $k = 50$, a catastrophic infrastructure failure event is injected, reducing the available compute capacity of the 8-VM pool by 90\% (dropping active VM nodes from 8 to 1).
-
-\subsubsection{Data Processing and Statistical Analysis}
-To account for stochastic variability in MAB exploration and local search heuristics, every experiment is executed across 10 independent random seeds ($S = \{101, 102, \dots, 110\}$). Raw execution logs from each round $k$—including selected arm $a_k$, makespan, cost, emissions, utilization, and updated Q-values—are streamed via standard I/O pipes and logged as structured JSON-Lines records.
-
-Post-processing computes cumulative and rolling mean metrics over a sliding window $W = 10$ rounds in Equation~\eqref{eq:eqn_13} below:
-\begin{equation}
-\label{eq:eqn_13}
-\bar{R}_k = \frac{1}{W} \sum_{i=k-W+1}^{k} R_i
-\end{equation}
-We report the mean $\mu$ and standard deviation $\sigma$ across all 10 seeds. To confirm statistical significance between MAB variants and static baselines, we apply two Paired Student's $t$-tests and Wilcoxon Signed-Rank tests with a significance threshold of $\alpha = 0.05$.
+To confirm how adaptable the scheduler is, we simulate an infrastructure failure event, where we reduce the available computing resources by 90\%.

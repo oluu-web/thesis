@@ -13,7 +13,7 @@ Figures~\ref{fig:selection_evolution_hpc2n} and~\ref{fig:selection_evolution_nas
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{hpc2n_ucb_arm_selection_evolution.png}
-        \caption{HPC2N -- UCB1}
+        \caption{HPC2N -- UCB}
         \label{fig:selection_hpc2n_ucb}
     \end{subfigure}
     \hfill
@@ -46,7 +46,7 @@ Figures~\ref{fig:selection_evolution_hpc2n} and~\ref{fig:selection_evolution_nas
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{nasa_ucb_arm_selection_evolution.png}
-        \caption{NASA -- UCB1}
+        \caption{NASA -- UCB}
         \label{fig:selection_nasa_ucb}
     \end{subfigure}
     \hfill
@@ -74,22 +74,21 @@ Figures~\ref{fig:selection_evolution_hpc2n} and~\ref{fig:selection_evolution_nas
     \label{fig:selection_evolution_nasa}
 \end{figure}
 
-Across both workloads, distinct policy convergence phases emerge:
 \begin{itemize}
-    \item \textbf{Initial Exploration Phase ($k \le 10$):} Unbiased initial sampling yields a broad distribution over list schedulers (\texttt{heft}, \texttt{peft}, \texttt{min\_min}, \texttt{max\_min}), local search metaheuristics (\texttt{simulated\_annealing}), and hybrid algorithms (\texttt{hghhc}).
-    \item \textbf{Exploitation Regime on HPC2N ($k > 15$):} On the volatile HPC2N trace, UCB1 (Figure~\ref{fig:selection_hpc2n_ucb}) and Discounted UCB (Figure~\ref{fig:selection_hpc2n_discounted}) heavily exploit \texttt{hghhc} (occupying up to $80\%$ of selection windows between rounds 40 and 90), while selectively triggering \texttt{heft} and \texttt{peft} during workload shifts around round 65 and 95. Thompson Sampling (Figure~\ref{fig:selection_hpc2n_thompson}) maintains a more continuous, stochastic sampling spread between \texttt{hghhc}, \texttt{peft}, and \texttt{sufferage}.
-    \item \textbf{Phase Lock on NASA Ames:} On the NASA Ames trace, UCB1 (Figure~\ref{fig:selection_nasa_ucb}) locks onto \texttt{round\_robin} and \texttt{max\_min} between rounds 30 and 60 before transitioning to \texttt{peft}. Discounted UCB (Figure~\ref{fig:selection_nasa_discounted}) dynamically cycles between \texttt{sufferage}, \texttt{simulated\_annealing}, \texttt{hghhc}, and \texttt{peft}, preventing premature policy saturation in highly uniform arrival regimes.
+    \item \textbf{Initial Exploration Phase ($k \le 10$):} Unbiased initial sampling yields a broad distribution over the selected algorithms
+    \item \textbf{Exploitation Regime on HPC2N ($k > 15$):} On the HPC2N trace, UCB (Figure~\ref{fig:selection_hpc2n_ucb}) and Discounted UCB (Figure~\ref{fig:selection_hpc2n_discounted}) heavily exploit \texttt{hghhc}, which occupies up to $80\%$ of selection windows between rounds 40 and 90, while selectively triggering \texttt{heft} and \texttt{peft} during workload shifts around round 65 and 95. Thompson Sampling (Figure~\ref{fig:selection_hpc2n_thompson}) maintains a more continuous sampling spread between \texttt{hghhc}, \texttt{peft}, and \texttt{sufferage}.
+    \item \textbf{Phase Lock on NASA Ames:} On the NASA Ames trace, UCB (Figure~\ref{fig:selection_nasa_ucb}) locks onto \texttt{round\_robin} and \texttt{max\_min} between rounds 30 and 60 before transitioning to \texttt{peft}. Discounted UCB (Figure~\ref{fig:selection_nasa_discounted}) dynamically shuffles between \texttt{sufferage}, \texttt{simulated\_annealing}, \texttt{hghhc}, and \texttt{peft}, which prevents a premature policy saturation in highly uniform arrival regimes.
 \end{itemize}
 
 \subsubsection{Cumulative Makespan Trajectories}
-Figures~\ref{fig:makespan_hpc2n_all} and~\ref{fig:makespan_nasa_all} showcase the cumulative makespan curves across all four bandit implementations against standalone baseline heuristics (\texttt{heft}, \texttt{peft}, \texttt{hghhc}, and \texttt{min\_min}).
+Figures~\ref{fig:makespan_hpc2n_all} and~\ref{fig:makespan_nasa_all} showcase the cumulative makespan curves across all four bandit implementations against standalone baseline heuristics.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{hpc2n_ucb_cumulative_makespan.png}
-        \caption{HPC2N -- UCB1}
+        \caption{HPC2N -- UCB}
         \label{fig:makespan_hpc2n_ucb}
     \end{subfigure}
     \hfill
@@ -122,7 +121,7 @@ Figures~\ref{fig:makespan_hpc2n_all} and~\ref{fig:makespan_nasa_all} showcase th
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{nasa_ucb_cumulative_makespan.png}
-        \caption{NASA -- UCB1}
+        \caption{NASA -- UCB}
         \label{fig:makespan_nasa_ucb}
     \end{subfigure}
     \hfill
@@ -152,9 +151,9 @@ Figures~\ref{fig:makespan_hpc2n_all} and~\ref{fig:makespan_nasa_all} showcase th
 
 The primary empirical insights include:
 \begin{itemize}
-    \item \textbf{Mitigation of Baseline Degradation:} Static \texttt{min\_min} exhibits severe performance degradation on NASA Ames (Figures~\ref{fig:makespan_nasa_ucb}--\ref{fig:makespan_nasa_epsilon}), accumulating over $1.6 \times 10^9$ seconds in makespan by round 100 due to severe task queueing. All MAB controllers avoid this failure mode by deprioritizing \texttt{min\_min} early.
-    \item \textbf{Performance Superiority on HPC2N:} On HPC2N (Figure~\ref{fig:makespan_hpc2n_all}), standard UCB1, Discounted UCB, Thompson Sampling, and $\epsilon$-Greedy achieve total cumulative makespans between $1.2 \times 10^4$ and $1.7 \times 10^4$ seconds. This represents a $59.5\%$--$71.4\%$ improvement over \texttt{min\_min} ($4.2 \times 10^4$ seconds) and consistently outperforms static list schedulers (\texttt{heft} and \texttt{peft} at $\approx 2.0 \times 10^4$ seconds).
-    \item \textbf{Exploration Penalty under Thompson Sampling:} On NASA Ames (Figure~\ref{fig:makespan_nasa_thompson}), Thompson Sampling accumulates $8.0 \times 10^8$ seconds makespan, whereas $\epsilon$-Greedy (Figure~\ref{fig:makespan_nasa_epsilon}) terminates at $1.7 \times 10^8$ seconds, demonstrating that persistent posterior sampling can incur unnecessary exploration overhead in steady-state workloads.
+    \item \textbf{Mitigation of Baseline Degradation:} Static \texttt{min\_min} exhibits severe performance degradation on NASA Ames (Figures~\ref{fig:makespan_nasa_ucb}--\ref{fig:makespan_nasa_epsilon}), accumulating over $1.6 \times 10^9$ seconds in makespan by round 100 due to severe task queueing. All MAB controllers avoid this failure mode by moving away from \texttt{min\_min} as early into the batch as possible.
+    \item \textbf{Performance Superiority on HPC2N:} On HPC2N (Figure~\ref{fig:makespan_hpc2n_all}), standard UCB, Discounted UCB, Thompson Sampling, and $\epsilon$-Greedy all show a $59.5\%$--$71.4\%$ improvement over \texttt{min\_min} and constantly outperforms the static list schedulers.
+    \item \textbf{Exploration Penalty under Thompson Sampling:} On NASA Ames (Figure~\ref{fig:makespan_nasa_thompson}), Thompson Sampling accumulates $8.0 \times 10^8$ seconds makespan, whereas $\epsilon$-Greedy (Figure~\ref{fig:makespan_nasa_epsilon}) terminates at $1.7 \times 10^8$ seconds, which shows that posterior sampling can lead to unnecessary exploration overhead in fairly predictable workloads.
 \end{itemize}
 
 % \subsubsection{Multi-Objective Radar Profile Analysis}
@@ -165,7 +164,7 @@ The primary empirical insights include:
 %     \begin{subfigure}[b]{0.48\textwidth}
 %         \centering
 %         \includegraphics[width=\textwidth]{hpc2n_ucb_radar_multimetric.png}
-%         \caption{HPC2N -- UCB1}
+%         \caption{HPC2N -- UCB}
 %         \label{fig:radar_hpc2n_ucb}
 %     \end{subfigure}
 %     \hfill
@@ -198,7 +197,7 @@ The primary empirical insights include:
 %     \begin{subfigure}[b]{0.48\textwidth}
 %         \centering
 %         \includegraphics[width=\textwidth]{nasa_ucb_radar_multimetric.png}
-%         \caption{NASA -- UCB1}
+%         \caption{NASA -- UCB}
 %         \label{fig:radar_nasa_ucb}
 %     \end{subfigure}
 %     \hfill
@@ -233,7 +232,7 @@ The primary empirical insights include:
 % \end{itemize}
 
 \subsubsection{Cross-Algorithm Selection Profile Heatmaps}
-Figures~\ref{fig:heatmap_hpc2n} and~\ref{fig:heatmap_nasa} illustrate the aggregate low-level heuristic selection frequency distributions (\%) across all four Multi-Armed Bandit (MAB) controllers on the HPC2N and NASA Ames workload traces, respectively.
+Figures~\ref{fig:heatmap_hpc2n} and~\ref{fig:heatmap_nasa} show how frequently each low-level heuristic was selected across all four MAB controllers on both the HPC2N and NASA workload traces.
 
 \begin{figure}[htbp]
     \centering
@@ -256,10 +255,9 @@ Figures~\ref{fig:heatmap_hpc2n} and~\ref{fig:heatmap_nasa} illustrate the aggreg
 
 Key selection tendencies across workload domains include:
 \begin{enumerate}
-    \item \textbf{Primary Arm Preference (HPC2N):} On the bursty HPC2N trace (Figure~\ref{fig:heatmap_hpc2n}), \texttt{hghhc} dominates selection across all MAB formulations ($75.0\%$ under $\epsilon$-Greedy, $63.0\%$ under UCB1, $51.0\%$ under Discounted UCB, and $34.0\%$ under Thompson Sampling) due to its high schedule compaction capability during volatile arrival spikes.
-    \item \textbf{Workload-Driven Policy Shift (NASA Ames):} On the more uniform NASA Ames trace (Figure~\ref{fig:heatmap_nasa}), the selection density shifts dramatically away from pure metaheuristics toward list-based and priority-driven heuristics. \texttt{peft} and \texttt{sufferage} emerge as preferred arms under UCB1 and Discounted UCB (accounting for $\approx 38.0\%$ and $26.0\%$ of total selections, respectively), while \texttt{round\_robin} and \texttt{max\_min} are transiently engaged during high-concurrency rounds.
-    \item \textbf{Secondary Arm Utilization \& Diversity:} Discounted UCB allocates significant secondary sampling density to \texttt{peft} ($14.0\%$ on HPC2N, $28.0\%$ on NASA) and \texttt{heft} ($11.0\%$ on HPC2N), maintaining policy agility against workload non-stationarity. Thompson Sampling exhibits the broadest exploration envelope, distributing selections across \texttt{peft} ($23.0\%$), \texttt{sufferage} ($8.0\%$), and \texttt{simulated\_annealing} ($12.0\%$).
-    \item \textbf{Filtering Inefficient Arms:} Inefficient or high-overhead heuristics—such as \texttt{heft\_duplication}, \texttt{max\_min} (on HPC2N), and static \texttt{min\_min}—are systematically suppressed, each receiving $\le 4.0\%$ of total choices across all MAB engines.
+    \item \textbf{Primary Arm Preference (HPC2N):} On the HPC2N trace (Figure~\ref{fig:heatmap_hpc2n}), \texttt{hghhc} dominates selection across all MAB formulations ($75.0\%$ under $\epsilon$-Greedy, $63.0\%$ under UCB, $51.0\%$ under Discounted UCB, and $34.0\%$ under Thompson Sampling) due to the fact that it can efficiently schedule the tasks into available virtual machines.
+    \item \textbf{Workload-Driven Policy Shift (NASA Ames):} On the NASA Ames trace (Figure~\ref{fig:heatmap_nasa}), the selection density shifts dramatically away from pure metaheuristics toward list-based and priority-driven heuristics. \texttt{peft} and \texttt{sufferage} emerge as preferred arms under UCB and Discounted UCB (accounting for $\approx 38.0\%$ and $26.0\%$ of total selections, respectively), while \texttt{round\_robin} and \texttt{max\_min} are sparsely engaged during high-concurrency rounds.
+    \item \textbf{Filtering Inefficient Arms:} Inefficient or high-overhead heuristics are suppressed, receiving $\le 4.0\%$ of total choices across all MAB engines.
 \end{enumerate}
 
 
@@ -275,15 +273,21 @@ Key selection tendencies across workload domains include:
 To ensure complete transparency, we identify three methodological limitations of this study:
 
 \subsubsection{Hyperparameter Tuning and Exploration Bounds}
-The exploration factor $c = \sqrt{2}$ in UCB1 and discount factor $\gamma = 0.95$ in Discounted UCB were fixed globally. While effective for HPC2N, fixed parameters can lead to prolonged exploration phases on uniform traces like NASA Ames, temporarily favouring sub-optimal heuristics.
-Optimizing these hyperparameters dynamically makes sure that the scheduler maintains a balance between exploration and exploitation across diverse and non-stationary workloads.
+The exploration factor $c = \sqrt{2}$ in UCB and discount factor $\gamma = 0.95$ in Discounted UCB were used as a global constant, which can lead to longer exploration phases than needed, which may favour sub-optimal heuristics. Finding a way to dynamically set these values will ensure that the scheduler maintains a decent balance between exploration and exploitation.
 
 \subsubsection{Simulation Idealization vs. Real-World Cloud Dynamics}
 
-CloudSim Plus models discrete execution deterministically. Real-world cloud environments introduce network jitter, VM cold-start latencies, and hypervisor resource contention, which introduce variance into heuristic execution times.
+For the purpose of this project, we make use of CloudSim, which executes tasks deterministically. But this will never be the case in real-world scenarios, as there will be network jitter, Vm cold starts and hypervisor resource contention, which will introduce some level of variance into heuristic execution times.
 
 To bridge the gap between deterministic simulation and physical cloud infrastructure, three architectural extensions can be made: Asynchronous Policy Updates that transition the Upper-Level Multi-Armed Bandit (MAB) engine from discrete batch execution to an asynchronous event-driven loop that updates reward metrics continuously as telemetry streams arrive from live cloud nodes, adaptive reward smoothing that implements an exponential moving average on raw runtime feedback to prevent transient network anomalies from corrupting historical reward distributions and Fallback \& Safety Bounds by Setting hard SLA timeout thresholds that force a deterministic baseline heuristic (e.g., HEFT) if an exploitation arm experiences unexpected physical delay.
 
+To bridge this gap, we can make three extensions:
+
+\begin{itemize}
+    \item \textbf{Asynchronous Policy Update:} This is going to help transition the decision plane from a discrete batch execution model to an asynchronous event-driven loop that updates reward metrics continuously.
+    \item \textbf{Adaptive Reward Smoothing:} An exponential moving average on feedback to prevent anomalies from corrupting historical reward distributions.
+    \item \textbf{Fallback and Safety Bounds:} Hard SLA thresholds should be set that forces a baseline heuristic, if an exploitation arm experiences any delay.
+\end{itemize}
 Deploying the current system directly onto live cloud infrastructure without these adaptation mechanisms yields predictable performance trade-offs such as an exploration phase delay, a robustness to non-stationary shift and suboptimal fine-grained decisions.
 
 

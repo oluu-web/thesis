@@ -5,20 +5,19 @@
 \section{Design Specification}
 \label{sec:Design}
 %% ==============================
-This section outlines the architectural framework, functional requirements, component interactions, and algorithmic design underlying our dynamic Multi-Armed Bandit (MAB) hyper-heuristic system.
+This section outlines the architectural framework, functional requirements and algorithmic design of the system.
 
 \subsection{System Requirements and Architectural Constraints}
-To deliver adaptive, multi-objective scheduling without introducing runtime bottlenecks, the system architecture must meet five key technical requirements:
+To ensure that the scheduler can properly schedule tasks without any bottlenecks, as well as being adaptive, there are four key technical requirements that must be met:
 \begin{enumerate}
-    \item \textbf{Decoupled Execution Architecture:} The decision engine and the cloud simulation environment must run in separate process spaces to allow modular updates to learning algorithms or simulation backends without cross-language bindings or tight coupling.
+    \item \textbf{Decoupled Execution Architecture:} The control plane and the cloud simulation environment must run as standalone processes to ensure modular updates and avoid tight coupling.
     \item \textbf{Low-Latency Inter-Process Communication (IPC):} Communication between the decision controller and the simulation platform must operate via high-throughput, streaming pipes to handle task arrival streams in real time.
     \item \textbf{Non-Stationary Adaptability:} The hyper-heuristic controller must continuously update internal policy states to recover quickly from sudden node drops or sudden shifts in workload volume.
-    \item \textbf{Multi-Objective Metric Extraction:} The simulation backend must log fine-grained runtime metrics—makespan, execution cost, carbon emissions, and node-level VM utilization—at the end of every execution batch.
-    \item \textbf{Trace-Driven Reproducibility:} The pipeline must support exact trace replay with controlled seed initialization to guarantee fair benchmarking across disparate bandit algorithms.
+    \item \textbf{Multi-Objective Metric Extraction:} The simulation backend must log runtime metrics like makespan and execution cost at the end of every execution batch.
 \end{enumerate}
 
 \subsection{System Architecture and Streaming Pipe Pipeline}
-The system uses a decoupled, event-driven architecture split into two main subsystems: a high-level \textbf{Python Hyper-Heuristic Decision Engine} and a \textbf{Java CloudSim Plus Simulation Backend}. Figure~\ref{fig:arch_pipeline} illustrates the structural design and streaming interface.
+The system uses a decoupled, event-driven architecture split into two main subsystems: a high-level \textbf{Python Hyper-Heuristic Control Plane} and a \textbf{Java CloudSim Plus Simulation Environment}. Figure~\ref{fig:arch_pipeline} illustrates the structural design and streaming interface.
 
 \begin{figure}[htbp]
 \centering
@@ -28,7 +27,7 @@ The system uses a decoupled, event-driven architecture split into two main subsy
 |                                                                       |
 |  +-----------------------+    +------------------------------------+  |
 |  | Workload Fingerprinter |    | MAB Controller                    |  |
-|  | (CoV Metrics Engine)  |    | (D-UCB / UCB1 / Thompson / eps-Gr) |  |
+|  | (CoV Metrics Engine)  |    | (D-UCB / UCB / Thompson / eps-Gr) |  |
 |  +-----------+-----------+    +-----------------+------------------+  |
 |              |                                  |                     |
 |              +-----------------+----------------+                     |
@@ -65,16 +64,16 @@ The system uses a decoupled, event-driven architecture split into two main subsy
 
 The interaction workflow proceeds as follows:
 \begin{enumerate}
-    \item \textbf{Batch Arrival and Workload Characterization:} The Python engine ingests a batch of tasks $B_k$ from the trace reader and calculates its Coefficient of Variation ($\text{CoV}_k$).
-    \item \textbf{Action Selection:} The MAB controller passes $\text{CoV}_k$ to its selection rule ($\epsilon$-Greedy, UCB1, Discounted UCB, or Thompson Sampling) to pick an arm $a_k \in \mathcal{A}$.
-    \item \textbf{Command Streaming:} The engine packages $a_k$ and $B_k$ metadata into a structured JSON-Lines payload and writes it to standard output.
-    \item \textbf{Simulation Execution:} The Java CloudSim Plus process reads standard input, deserializes the JSON object, instantiates the chosen low-level heuristic, schedules the tasks across the active VM pool, and runs the simulation step.
-    \item \textbf{Feedback Streaming:} Once the batch completes, CloudSim Plus calculates makespan, financial cost, carbon emissions, and VM utilization, serializes these metrics into JSON-Lines, and writes them back to standard output.
-    \item \textbf{Reward Squashing and Policy Update:} The Python engine reads the feedback payload, computes the batch-relative reward $R_k \in [-1, 1]$ via the hyperbolic tangent function, and updates the bandit's Q-values or probability distributions.
+    \item \textbf{Batch Arrival and Workload Characterization:} The Python engine ingests a batch of tasks $B_k$ from the trace reader.
+    \item \textbf{Action Selection:} The MAB controller passes the tasks to its selection rule ($\epsilon$-Greedy, UCB, Discounted UCB, or Thompson Sampling) to pick an arm.
+    \item \textbf{Command Streaming:} The engine packages arm and batch metadata into a  JSON payload and writes it to standard output.
+    \item \textbf{Simulation Execution:} The Java CloudSim process reads standard input, deserializes the JSON object, instantiates the chosen low-level heuristic, schedules the tasks across the active VM pool, and runs the simulation step.
+    \item \textbf{Feedback Streaming:} Once the batch completes, CloudSim calculates makespan, financial cost, carbon emissions, and VM utilization, then serializes these metrics into JSON, and writes them back to standard output.
+    \item \textbf{Reward Squashing:} The Python engine reads the feedback payload, computes the batch-relative reward $R_k \in [-1, 1]$ via the hyperbolic tangent function, and updates the bandit's Q-values or probability distributions.
 \end{enumerate}
 
 \subsection{Algorithmic Functionality of the Hyper-Heuristic Model}
-Our core algorithm—the \textbf{Dynamic Workload-Aware Discounted MAB Hyper-Heuristic}, operates as a high-level policy wrapper over the pool of nine low-level heuristics. 
+Our core algorithm operates as a high-level policy wrapper over the pool of nine low-level heuristics. 
 
 \subsubsection{Operational Logic}
 Algorithm~\ref{alg:mab_hyper_heuristic} details the step-by-step decision framework running inside the Python orchestration controller.
@@ -113,9 +112,3 @@ Algorithm~\ref{alg:mab_hyper_heuristic} details the step-by-step decision framew
 \ENDFOR
 \end{algorithmic}
 \end{algorithm}
-
-\subsubsection{Key Algorithmic Mechanisms}
-\begin{itemize}
-    \item \textbf{Dynamic Memory Decay:} By weighting past actions with $\gamma^{k-1-i}$, observations older than $1 / (1 - \gamma)$ rounds decay exponentially. When a capacity drop occurs at $k=50$, stale reward statistics from pre-failure rounds quickly lose influence, allowing the scheduler to drop previously dominant meta-heuristics in favor of fast, robust list schedulers like PEFT.
-    \item \textbf{Scale-Invariant Multi-Objective Alignment:} Direct reward aggregation often causes the largest physical metric (e.g., makespan in seconds vs cost in cents) to dominate decisions. Normalizing performance relative to a Round-Robin baseline and squashing the output via $\tanh(\lambda \cdot S_k)$ keeps the reward signal stable within $[-1, 1]$, protecting the bandit from gradient explosion or scale distortion.
-\end{itemize}

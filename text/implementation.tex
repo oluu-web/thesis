@@ -6,24 +6,24 @@
 \label{sec:Implementation}
 %% ==============================
 
-This section describes the final implementation of the dynamic Multi-Armed Bandit (MAB) hyper-heuristic system. It covers the core software stack, inter-process orchestration pipeline, low-level heuristic extensions, custom carbon and cost models in CloudSim Plus, and structured data outputs.
+This section describes the final implementation of the dynamic Multi-Armed Bandit (MAB) hyper-heuristic system. It covers the core software stack, inter-process orchestration pipeline, low-level heuristic pool, and structured data outputs.
 
 \subsection{Technology Stack and Software Architecture}
 The framework uses a two-tier software architecture built on two primary programming environments:
 \begin{itemize}
-    \item \textbf{Python Execution Engine (v3.11.7):} Serves as the primary control plane; housing the multi-armed bandit decision algorithms, workload trace ingestion module, statistical workload fingerprinter, and batch-relative reward transformer. It uses \texttt{NumPy} and \texttt{SciPy} for vectorized statistical operations and \texttt{Pandas} for trace parsing.
-    \item \textbf{Java Simulation Engine (OpenJDK 21 / CloudSim Plus v7.3.0):} Acts as the discrete-event cloud execution backend. We extended CloudSim Plus core classes to support dynamic low-level heuristic instantiation, dynamic VM status manipulation, real-time energy calculation, and streaming I/O serialization.
+    \item \textbf{Python Execution Engine (v3.11.7):} Serves as the primary control plane; housing the multi-armed bandit decision algorithms, workload trace ingestion module, statistical workload fingerprinter and reward transformer. It uses \texttt{NumPy} and \texttt{SciPy} for statistical operations and \texttt{Pandas} for trace parsing.
+    \item \textbf{Java Simulation Engine (OpenJDK 21 / CloudSim Plus v7.3.0):} Acts as the cloud simulation environment. CloudSim Plus core classes were extended to support low-level heuristic instantiation and I/O streams
 \end{itemize}
 
 \subsection{Standard I/O Inter-Process Communication Pipeline}
-To avoid the binary overhead of JNI (Java Native Interface) or socket network latencies, inter-process communication relies on standard input/output streaming pipes using structured JSON-Lines (\texttt{jsonl}) formatting.
+In order to reduce the overhead of the spawning a new process for every CloudSim instance, we make use of inter-process communication to create a singular data stream between the Python control plane and the Java simulation engine.
 
-The Python controller launches the Java virtual machine as a managed subprocess. For every workload batch, Python emits a single-line JSON payload to stdout containing the batch index, target low-level heuristic identifier, and task specifications (length in Million Instructions, file input/output sizes, and processing dependencies). 
+The Python program launches the Java instance as a managed subprocess that receives a JSON payload containing the batch index and task specifications.
 
-The Java application maintains an active input stream reader that parses incoming JSON records asynchronously. Upon executing the requested batch across the virtual machine pool, CloudSim Plus serializes execution outputs: makespan, total execution cost, carbon emissions, and VM utilization profiles, into a single-line JSON object and writes it to standard stdout. Python captures this stream using non-blocking I/O buffers, computes the squashed reward, and updates the active bandit parameters without causing process blocking or buffer overflows.
+The Java application holds a stream reader that parses incoming JSON records asynchronously, which then executes the batch across the virtual machine pool.
 
 \subsection{Low-Level Heuristic Pool Implementation}
-The low-level heuristic pool is implemented inside the Java simulation core under a unified strategy interface. Nine distinct scheduling routines were implemented:
+The low-level heuristic pool is implemented inside the Java simulation core under a unified strategy interface, with nine distinct scheduling routines being implemented:
 \begin{enumerate}
     \item \textbf{List-Based Schedulers (HEFT, PEFT, Min-Min, Max-Min, Sufferage, HEFT-TD):} Custom task prioritization routines construct directed acyclic graph (DAG) task ranks and evaluate expected finish times across heterogeneous VM capacity matrices on the fly.
     \item \textbf{Deterministic Baseline (Round-Robin):} Sequentially maps incoming cloudlets to active VMs to establish a dynamic baseline for performance normalization.
@@ -33,25 +33,20 @@ The low-level heuristic pool is implemented inside the Java simulation core unde
 \subsection{Energy, Carbon Footprint, and Cost Modeling}
 To evaluate multi-objective trade-offs accurately, custom tracking modules were integrated directly into the CloudSim Plus Datacenter engine:
 \begin{itemize}
-    \item \textbf{Monetary Cost Model:} Models dynamic cloud resource pricing. Each VM instance incurs a fixed per-second compute rate based on its allocated processing capacity (MIPS) and memory profile, following tier-based provider pricing schemes.
+    \item \textbf{Monetary Cost Model:} This models dynamic cloud resource pricing, with the help of AWS billing API. Each VM instance incurs a fixed per-second compute rate based on its allocated processing capacity (MIPS) and memory profile, following tier-based provider pricing schemes.
     \item \textbf{Dynamic Power Model:} Power consumption $P(u)$ is calculated as a function of instantaneous CPU utilization $u \in [0, 1]$:
     \begin{equation}
     P(u) = P_{\text{idle}} + (P_{\text{max}} - P_{\text{idle}}) \times u
     \end{equation}
     where $P_{\text{idle}}$ represents baseline VM standby power, and $P_{\text{max}}$ denotes peak power under full load.
-    \item \textbf{Carbon Footprint Model:} Operational power draw is multiplied by execution duration and converted to energy consumption in kilowatt-hours (kWh). Carbon emissions $E_{\text{carbon}}$ (in $\text{kg CO}_2\text{e}$) are derived by multiplying energy consumption by a regional grid carbon intensity coefficient $I_{\text{carbon}}$:
-    \begin{equation}
-    E_{\text{carbon}} = \left( \int P(u) \, dt \right) \times I_{\text{carbon}}
-    \end{equation}
 \end{itemize}
 
-% \subsection{Non-Stationary Infrastructure Fault Injection}
-% An automated fault injection component was implemented inside the Java backend to simulate physical infrastructure failure. The module monitors batch completion counters; upon reaching Round 50, it triggers a dynamic capacity drop event. The component deactivates 7 out of the 8 provisioned virtual machines, forcing all remaining incoming task streams onto a single operational node. This induces an immediate, severe resource bottleneck, testing the MAB algorithms' capacity to identify and adapt to sudden policy shifts.
+\subsection{Non-Stationary Infrastructure Fault Injection}
+An automated fault injection module was implemented in the Python environment to simulate physical infrastructure failure. The purpose of this is to monitor and evaluate how each bandit algorithm reacts to an instantaneous change in physical environments. The module shuts down seven of the eight provisioned virtual machines, thereby forcing all incoming tasks to a single machine.
 
 \subsection{Generated Outputs and Data Transformation}
-The execution pipeline produces three main structured artefacts for post-hoc analysis:
+The execution pipeline produces artefacts for post-hoc analysis:
 \begin{enumerate}
-    \item \textbf{Raw Trace Log Stream:} JSON-Lines files generated per run, recording batch-level decision metrics including selected heuristic arm, Coefficient of Variation ($\text{CoV}$), raw makespan, monetary cost, carbon output, mean VM utilization, and squashed reward $R_k$.
-    \item \textbf{Bandit Internal State Logs:} Historical records tracking parameter updates across decision rounds, including Q-value arrays, discounted pull counts $N_k(\gamma, a)$, upper confidence bound boundaries, and Thompson Sampling Beta distribution parameters ($\alpha_a, \beta_a$).
+    \item \textbf{Raw Trace Log Stream:} JSON files generated per run that hold batch-level decision metrics such as selected heuristic arm, raw makespan, monetary cost, carbon output, VM utilization, and squashed reward $R_k$.
     \item \textbf{Aggregated Seed Benchmark Dataset:} Structured CSV files combining metrics across all 10 random seeds per MAB variant and trace dataset.
 \end{enumerate}

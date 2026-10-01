@@ -54,6 +54,11 @@ Khan, F., Shah, I., Jan, S., Ahmad, S. \harvardand\ Whangbo, T.  \harvardyearlef
 Kumar, A. \harvardand\ Rai, D.  \harvardyearleft 2021\harvardyearright .
 \newblock Implementation of machine learning algorithm for task scheduling in cloud computing environment, {\em Turkish Online Journal of Qualitative Inquiry (TOJQI)} {\bf 12}(6):~5201--5209.
 
+\harvarditem[Kumar et~al.]{Kumar, Sharma, Goel \harvardand\ Singh}{2019}{KUMAR20191}
+Kumar, M., Sharma, S., Goel, A. \harvardand\ Singh, S.  \harvardyearleft 2019\harvardyearright .
+\newblock A comprehensive survey for scheduling techniques in cloud computing, {\em Journal of Network and Computer Applications} {\bf 143}:~1--33.
+\newline\harvardurl{https://www.sciencedirect.com/science/article/pii/S1084804519302036}
+
 \harvarditem[Liang et~al.]{Liang, Liu, Song, Yin \harvardand\ Wang}{2026}{Liang2026Joint}
 Liang, H., Liu, C., Song, Y., Yin, Z. \harvardand\ Wang, G.  \harvardyearleft 2026\harvardyearright .
 \newblock Joint two stage beamforming and user scheduling for leo satellite communications via hierarchical multi-armed bandit, {\em IEEE Transactions on Cognitive Communications and Networking} {\bf 12}:~1918--1932.
