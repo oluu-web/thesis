@@ -1277,4 +1277,53 @@ File: ./figures/hpc2n_thompson_arm_selection_evolution.png Graphic file (type pn
 <use ./figures/hpc2n_thompson_arm_selection_evolution.png>
 Package pdftex.def Info: ./figures/hpc2n_thompson_arm_selection_evolution.png  used on input line 29.
 (pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
-<./figures/hpc2n_epsilon_arm_selection_evolution.png, id=451, 867.24p
+<./figures/hpc2n_epsilon_arm_selection_evolution.png, id=451, 867.24pt x 433.62pt>
+File: ./figures/hpc2n_epsilon_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/hpc2n_epsilon_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/hpc2n_epsilon_arm_selection_evolution.png  used on input line 36.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_ucb_arm_selection_evolution.png, id=452, 867.24pt x 433.62pt>
+File: ./figures/nasa_ucb_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/nasa_ucb_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/nasa_ucb_arm_selection_evolution.png  used on input line 48.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_discounted_ucb_arm_selection_evolution.png, id=453, 867.24pt x 433.62pt>
+File: ./figures/nasa_discounted_ucb_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/nasa_discounted_ucb_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/nasa_discounted_ucb_arm_selection_evolution.png  used on input line 55.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_thompson_arm_selection_evolution.png, id=454, 867.24pt x 433.62pt>
+File: ./figures/nasa_thompson_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/nasa_thompson_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/nasa_thompson_arm_selection_evolution.png  used on input line 62.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_epsilon_arm_selection_evolution.png, id=455, 867.24pt x 433.62pt>
+File: ./figures/nasa_epsilon_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/nasa_epsilon_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/nasa_epsilon_arm_selection_evolution.png  used on input line 69.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/hpc2n_ucb_cumulative_makespan.png, id=463, 722.7pt x 361.35pt>
+File: ./figures/hpc2n_ucb_cumulative_makespan.png Graphic file (type png)
+<use ./figures/hpc2n_ucb_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/hpc2n_ucb_cumulative_makespan.png  used on input line 90.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/hpc2n_discounted_ucb_cumulative_makespan.png, id=464, 722.7pt x 361.35pt>
+File: ./figures/hpc2n_discounted_ucb_cumulative_makespan.png Graphic file (type png)
+<use ./figures/hpc2n_discounted_ucb_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/hpc2n_discounted_ucb_cumulative_makespan.png  used on input line 97.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/hpc2n_thompson_cumulative_makespan.png, id=465, 722.7pt x 361.35pt>
+File: ./figures/hpc2n_thompson_cumulative_makespan.png Graphic file (type png)
+<use ./figures/hpc2n_thompson_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/hpc2n_thompson_cumulative_makespan.png  used on input line 104.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/hpc2n_epsilon_cumulative_makespan.png, id=466, 722.7pt x 361.35pt>
+File: ./figures/hpc2n_epsilon_cumulative_makespan.png Graphic file (type png)
+<use ./figures/hpc2n_epsilon_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/hpc2n_epsilon_cumulative_makespan.png  used on input line 111.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+ [13] [14 <./figures/hpc2n_ucb_arm_selection_evolution.png> <./figures/hpc2n_discounted_ucb_arm_selection_evolution.png> <./figures/hpc2n_thompson_arm_selection_evolution.png> <./figures/hpc2n_epsilon_arm_selection_evolution.png> <./figures/nasa_ucb_arm_selection_evolution.png> <./figures/nasa_discounted_ucb_arm_selection_evolution.png> <./figures/nasa_thompson_arm_selection_evolution.png> <./figures/nasa_epsilon_arm_selection_evolution.png>]
+<./figures/nasa_ucb_cumulative_makespan.png, id=487, 722.7pt x 361.35pt>
+File: ./figures/nasa_ucb_cumulative_makespan.png Graphic file (type png)
+<use ./figures/nasa_ucb_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/nasa_ucb_c
