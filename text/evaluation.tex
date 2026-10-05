@@ -297,10 +297,7 @@ Evaluating performance at batch boundaries hides task-level variations within a 
 \subsection{Suggested Modifications and Design Improvements}
 To address these limitations, we propose three enhancements:
 \begin{enumerate}
-    \item \textbf{Adaptive Memory Decay ($\gamma_k$):} Dynamically adjust the discount factor based on workload volatility:
-    \begin{equation}
-    \gamma_k = 1 - \alpha \cdot \tanh\left( \big| \text{CoV}_k - \text{CoV}_{k-1} \big| \right)
-    \end{equation}
-    \item \textbf{Contextual Bandits (LinUCB):} Incorporate real-time batch state vectors $\boldsymbol{x}_k = [\text{CoV}_k, |B_k|, \text{ActiveVMs}]$ to enable state-aware heuristic selection.
-    \item \textbf{Testbed Deployment:} Evaluate the hyper-heuristic engine on a physical Kubernetes cluster to measure performance under real-world network jitter and container orchestration overheads.
+    \item \textbf{Adaptive Memory Decay ($\gamma_k$):} We can opt to adjust the discount factor for the older actions dynamically, based on the workload volatility. 
+    \item \textbf{Contextual Bandits:} Incorporate state vectors to enable state-aware heuristic selection.
+    \item \textbf{Testbed Deployment:} We can evaluate the scheduler on an actual Kubernetes cluster to assess the performance under real-world circumstance.
 \end{enumerate}
