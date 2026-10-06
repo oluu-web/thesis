@@ -255,7 +255,7 @@ Figures~\ref{fig:heatmap_hpc2n} and~\ref{fig:heatmap_nasa} show how frequently e
 
 Key selection tendencies across workload domains include:
 \begin{enumerate}
-    \item \textbf{Primary Arm Preference (HPC2N):} On the HPC2N trace (Figure~\ref{fig:heatmap_hpc2n}), \texttt{hghhc} dominates selection across all MAB formulations ($75.0\%$ under $\epsilon$-Greedy, $63.0\%$ under UCB, $51.0\%$ under Discounted UCB, and $34.0\%$ under Thompson Sampling) due to the fact that it can efficiently schedule the tasks into available virtual machines.
+    \item \textbf{Primary Arm Preference (HPC2N):} On the HPC2N trace (Figure~\ref{fig:heatmap_hpc2n}), \texttt{hghhc} dominates selection across all MAB algoorithms due to the fact that it can efficiently schedule the tasks into available virtual machines.
     \item \textbf{Workload-Driven Policy Shift (NASA Ames):} On the NASA Ames trace (Figure~\ref{fig:heatmap_nasa}), the selection density shifts dramatically away from pure metaheuristics toward list-based and priority-driven heuristics. \texttt{peft} and \texttt{sufferage} emerge as preferred arms under UCB and Discounted UCB (accounting for $\approx 38.0\%$ and $26.0\%$ of total selections, respectively), while \texttt{round\_robin} and \texttt{max\_min} are sparsely engaged during high-concurrency rounds.
     \item \textbf{Filtering Inefficient Arms:} Inefficient or high-overhead heuristics are suppressed, receiving $\le 4.0\%$ of total choices across all MAB engines.
 \end{enumerate}
