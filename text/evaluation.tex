@@ -279,12 +279,10 @@ The exploration factor $c = \sqrt{2}$ in UCB and discount factor $\gamma = 0.95$
 
 For the purpose of this project, we make use of CloudSim, which executes tasks deterministically. But this will never be the case in real-world scenarios, as there will be network jitter, Vm cold starts and hypervisor resource contention, which will introduce some level of variance into heuristic execution times.
 
-To bridge the gap between deterministic simulation and physical cloud infrastructure, three architectural extensions can be made: Asynchronous Policy Updates that transition the Upper-Level Multi-Armed Bandit (MAB) engine from discrete batch execution to an asynchronous event-driven loop that updates reward metrics continuously as telemetry streams arrive from live cloud nodes, adaptive reward smoothing that implements an exponential moving average on raw runtime feedback to prevent transient network anomalies from corrupting historical reward distributions and Fallback \& Safety Bounds by Setting hard SLA timeout thresholds that force a deterministic baseline heuristic (e.g., HEFT) if an exploitation arm experiences unexpected physical delay.
-
 To bridge this gap, we can make three extensions:
 
 \begin{itemize}
-    \item \textbf{Asynchronous Policy Update:} This is going to help transition the decision plane from a discrete batch execution model to an asynchronous event-driven loop that updates reward metrics continuously.
+    \item \textbf{Asynchronous Policy Update:} This is going to help transition the decision plane from a periodic execution model to an asynchronous event-driven architecture that updates reward metrics instantly.
     \item \textbf{Adaptive Reward Smoothing:} An exponential moving average on feedback to prevent anomalies from corrupting historical reward distributions.
     \item \textbf{Fallback and Safety Bounds:} Hard SLA thresholds should be set that forces a baseline heuristic, if an exploitation arm experiences any delay.
 \end{itemize}
@@ -297,7 +295,7 @@ Evaluating performance at batch boundaries hides task-level variations within a 
 \subsection{Suggested Modifications and Design Improvements}
 To address these limitations, we propose three enhancements:
 \begin{enumerate}
-    \item \textbf{Adaptive Memory Decay ($\gamma_k$):} We can opt to adjust the discount factor for the older actions dynamically, based on the workload volatility. 
+    \item \textbf{Adaptive Memory Decay ($\gamma_k$):} We can dynamically adjust the discount factor for the older scheduled tasks based on how volatile the incoming workload is.
     \item \textbf{Contextual Bandits:} Incorporate state vectors to enable state-aware heuristic selection.
-    \item \textbf{Testbed Deployment:} We can evaluate the scheduler on an actual Kubernetes cluster to assess the performance under real-world circumstance.
+    \item \textbf{Testbed Deployment:} Testing the performance scheduler on a Kubernetes cluster that mimics real-world scenarios.
 \end{enumerate}
