@@ -5,7 +5,7 @@
 % \end{abstract}
 
 \begin{abstract}
- In the rising era of cloud-based applications, physical hardware management is delegated to data center companies. These cloud computing environments are tasked with efficiently handling varying workloads, schedule these workloads speedily, while ensuring maximum utilization of physical devices. Traditional scheduling techniques are not robust enough for dynamic workloads. This report presents a Multi-Armed Bandit hyper-heuristic framework for task scheduling. It integrates a low-level heuristic pool of various traditional scheduling algorithms, and tests them with a Java CloudSim backend.
+ In the rising era of cloud-based applications, physical hardware management is delegated to data center companies. These cloud environments are supposed to work with fluctuating requests from various clients, while handling the requests as quickly as possible. During this, they are also supposed to maximize the resources available. Traditional scheduling slgortihms are not sophisticated enough to handle dynamic workloads. This report presents a Multi-Armed Bandit hyper-heuristic framework for task scheduling. It integrates a low-level heuristic pool of various traditional scheduling algorithms, and tests them with a Java CloudSim backend.
 
  Four selection algorithms are compared against each other: $\epsilon$-Greedy, Standard UCB, Discounted UCB, and Scaled Thompson Sampling. The scheduler implements a reward function that optimizes makespan, execution cost and resource utilization. We use 2 varying worktraces: HPC2N and NASA datasets. After running the simulations, we get to see that the Discounted UCB selection mechanism provided the best results for highly varying workloads.
 \end{abstract}
