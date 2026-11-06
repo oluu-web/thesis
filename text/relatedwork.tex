@@ -1,7 +1,7 @@
 \section{Related Work}
 \label{sec:rw}
 
-The landscape of task scheduling in data centers keeps evolving. It has moved from traditional prioritization towards much more intricate online learning frameworks. Traditional scheduling research was more focused on singular objectives like makespan, using algorithms like HEFT and PEFT \citep{HosseiniShirvani2021A}. These traditional algorithms are heavily reliant on the fact that the physical hardware is statically available; it does not factor in downtime into its scheduling process. This makes it suffer serious performance degradation when it experiences hardware faults. To help with these limitations, newer algorithms like Hybrid Swarm Optimizers were developed \citep{Alkaam2025Hybrid}.
+The landscape of task scheduling in data centers keeps evolving. It has moved from traditional prioritization towards online learning frameworks. Traditional scheduling focused on optimizing just one objective such makespan, using algorithms like Heterogeneous Earliest Finish Time and Predictive Earliest Finish Time \citep{HosseiniShirvani2021A}. These traditional algorithms are heavily reliant on the fact that the physical hardware is statically available; it does not factor in downtime into its scheduling process. This makes it suffer serious performance degradation when it experiences hardware faults. To help with these limitations, newer algorithms like Hybrid Swarm Optimizers were developed \citep{Alkaam2025Hybrid}.
 
 The latest advancements in the space seem to have moved towards utilizing Deep Reinforcement Learning and Multi-Armed Bandit Algorithms \citep{Khan2025Machine,DeCarvalho2025Toward}. Using the Deep Reinforcement Learning methodology provides stellar results in stationary environments, but have very high training overhead \citep{Choppara2025Efficient,Sravan2026DRL}. Multi-Armed Bandit gives the option of using hyper-heuristics for lightweight online learning \citep{Singh2024Leveraging}
 
@@ -9,7 +9,7 @@ There are still three major gaps in the current literature:
 \begin{enumerate}
     \item \textbf{Historical Bias in Non-Stationary Environments:} Standard MAB algorithms such as UCB and standard Thompson Sampling keep a very long performance history window, which makes it difficult for them to quickly react to unexpected capacity drops, or other hardware failures.
     \item \textbf{Lack of Lightweight Contextual Workload Fingerprinting:} Existing contextual or content-aware schedulers often rely on heavy offline classifiers or neural feature extractors \citep{Adil2022scp}. 
-    \item \textbf{Unbalanced Multi-Objective Reward Formulations:} While sustainability and carbon intensity have emerged as first-class scheduling parameters alongside cost and latency \citep{Arora2023Towards}, existing multi-objective reward functions often suffer from scale distortion across heterogeneous execution batches, leading to single-metric dominance during bandit update steps.
+    \item \textbf{Unbalanced Multi-Objective Reward Formulations:} Although carbon intensity is now a major factor to be considered while scheduling \citep{Arora2023Towards}, existing multi-objective reward functions often get distorted across multiple batches.
 \end{enumerate}
 
 The remainder of this section critically reviews prior contributions across these foundational domains.
@@ -20,7 +20,7 @@ In heterogeneous cloud environments where tasks and requests don't all arrive in
 \citet{Mathew2014Study} categorised different scheduling algorithms around performance measures such as makespan, load balancing and throughput. \citet{Saurav2021A} takes this further by looking into energy-aware task scheduling in large, heterogeneous systems, and bargaining and exchange between execution speed and power consumption. All literature referenced in this section come to the same conclusion that traditional scheduling algorithms always underperform in heterogeneous environments.
 
 \subsection{Deterministic Task Prioritization and Heuristic Approximations}
-List-based algorithms like HEFT, PEFT and HSIP work in two stages: firstly, they rank the tasks, then they assign them to processors. This flow helps to make DAG scheduling less complex, and it provides predictable scheduling behaviour.
+List-based algorithms like Heterogeneous Earliest Finish Time (HEFT) and Predictive Earliest Finish Time (PEFT) work in two stages: firstly, they rank the tasks, then they assign them to processors.
 
 \citet{HosseiniShirvani2021A} uses this approach as a foundation to propose HH-LiSch: a hybrid list scheduler that combine two ranking strategies RankI and RankO. It was tested on benchmarks like Montage and Cybershake, and it saw a reduction in average makespan by 16.71\%, compared to HEFT and PEFT.
 

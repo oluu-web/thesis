@@ -23,7 +23,7 @@ The low-level heuristic pool consists of nine scheduling algorithms:
     \item \textbf{PEFT (Predicting Earliest Finish Time):} Extends HEFT by incorporating an Optimistic Cost Table (OCT) to evaluate the downstream path impact.
     \item \textbf{Min-Min:} Assigns small tasks first to resources that execute them the fastest.
     \item \textbf{Max-Min:} Prioritizes large tasks first to prevent longer duration jobs from monopolizing compute resources toward the end of execution.
-    \item \textbf{Round-Robin:} A deterministic baseline distributing tasks sequentially across active VMs regardless of task length or node capacity.
+    \item \textbf{Round-Robin:} This is the simplest form of task scheduling. It assigns a task to the next available VM.
     \item \textbf{Sufferage:} Assigns tasks based on sufferage value (the difference between a task's second-earliest and earliest finish times), prioritizing tasks that face the greatest penalty if delayed.
     \item \textbf{HEFT with Duplication (HEFT-TD):} Duplicates critical predecessor tasks on redundant VM idle slots to eliminate inter-task communication latency.
     \item \textbf{Simulated Annealing (SA):} A probabilistic local search meta-heuristic that escapes local optima by accepting inferior schedule moves according to a decaying temperature schedule.
