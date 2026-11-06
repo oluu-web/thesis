@@ -4,44 +4,44 @@ The top-level auxiliary file: report.aux
 A level-1 auxiliary file: titlepage.aux
 The style file: dcu.bst
 Database file #1: refs.bib
-You've used 21 entries,
+You've used 24 entries,
             2921 wiz_defined-function locations,
-            797 strings with 10527 characters,
-and the built_in function-call counts, 124117 in all, are:
-= -- 20294
-> -- 1960
+            815 strings with 11238 characters,
+and the built_in function-call counts, 135132 in all, are:
+= -- 22034
+> -- 2137
 < -- 0
-+ -- 10005
-- -- 609
-* -- 11060
-:= -- 24386
-add.period$ -- 42
-call.type$ -- 21
-change.case$ -- 294
-chr.to.int$ -- 21
-cite$ -- 21
-duplicate$ -- 326
-empty$ -- 696
-format.name$ -- 693
-if$ -- 22381
++ -- 10804
+- -- 662
+* -- 11969
+:= -- 26604
+add.period$ -- 48
+call.type$ -- 24
+change.case$ -- 336
+chr.to.int$ -- 24
+cite$ -- 24
+duplicate$ -- 396
+empty$ -- 829
+format.name$ -- 754
+if$ -- 24404
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 21
-newline$ -- 90
-num.names$ -- 224
-pop$ -- 48
+missing$ -- 24
+newline$ -- 102
+num.names$ -- 258
+pop$ -- 66
 preamble$ -- 1
-purify$ -- 315
+purify$ -- 360
 quote$ -- 0
-skip$ -- 342
+skip$ -- 410
 stack$ -- 0
-substring$ -- 29043
-swap$ -- 71
-text.length$ -- 294
+substring$ -- 31440
+swap$ -- 96
+text.length$ -- 336
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 84
+type$ -- 96
 warning$ -- 0
-while$ -- 464
+while$ -- 535
 width$ -- 0
-write$ -- 306
+write$ -- 354

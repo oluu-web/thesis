@@ -34,7 +34,7 @@ The low-level heuristic pool consists of nine scheduling algorithms:
 We evaluate four MAB selection mechanisms to manage the exploration-exploitation trade-off under dynamic cloud conditions:
 
 \subsubsection{$\epsilon$-Greedy}
-Selects the arm with the highest estimated mean reward with probability $1 - \epsilon$, and explores a random arm with probability $\epsilon$ as shown in Equation~\eqref{eq:eqn_1}:
+Selects the arm with the highest estimated mean reward with probability $1 - \epsilon$, and explores a random arm with probability $\epsilon$ \citep{adaptive}. As shown in Equation~\eqref{eq:eqn_1}:
 \begin{equation}
 \label{eq:eqn_1}
 a_k = \begin{cases} 
@@ -45,7 +45,7 @@ a_k = \begin{cases}
 where $\epsilon = 0.1$, and $\hat{Q}_k(a)$ is the empirical mean reward of arm $a$ up to round $k$.
 
 \subsubsection{Standard UCB}
-Constructs upper confidence bounds based on Hoeffding's Inequality to balance empirical performance and selection uncertainty shown in Equation~\eqref{eq:eqn_2}:
+Constructs upper confidence bounds based on Hoeffding's Inequality to balance empirical performance and selection uncertainty \citep{11041325}. Shown in Equation~\eqref{eq:eqn_2}:
 \begin{equation}
 \label{eq:eqn_2}
 a_k = \arg\max_{a \in \mathcal{A}} \left[ \hat{Q}_k(a) + c \cdot \sqrt{\frac{\ln k}{N_k(a)}} \right]
@@ -70,7 +70,7 @@ a_k = \arg\max_{a \in \mathcal{A}} \left[ \hat{Q}_k(\gamma, a) + 2 B \sqrt{\frac
 where $n_k(\gamma) = \sum_{a \in \mathcal{A}} N_k(\gamma, a)$, $\gamma = 0.95$, $B = 1.0$ represents the reward bound, and $\xi = 0.5$ tunes exploration intensity.
 
 \subsubsection{Scaled Thompson Sampling}
-Maintains continuous probability distributions over expected rewards. At round $k$, sample values are drawn for each arm $a \in \mathcal{A}$, and the arm with the maximum sample is selected, shown in Equation~\eqref{eq:eqn_6}:
+Maintains continuous probability distributions over expected rewards. At round $k$, sample values are drawn for each arm $a \in \mathcal{A}$, and the arm with the maximum sample is selected \citep{10662607}. Shown in Equation~\eqref{eq:eqn_6}:
 \begin{equation}
 \label{eq:eqn_6}
 a_k = \arg\max_{a \in \mathcal{A}} \theta_a
@@ -102,8 +102,8 @@ To ensure rigorous empirical evaluation \citep{Zhao2025Scheduling}, our experime
 \subsubsection{Trace Datasets}
 We evaluate the system using two real-world high-performance computing workload traces from the Parallel Workloads Archive:
 \begin{itemize}
-    \item \textbf{HPC2N Trace:} Workload trace containing long execution profiles and heavy resource demands.
-    \item \textbf{NASA Ames iPSC/860 Trace:} Shorter duration scale trace with dynamic arrival bursts and high arrival density.
+    \item \textbf{HPC2N Trace:} Workload trace containing long execution profiles and heavy resource demands. It can be found \href{https://www.cs.huji.ac.il/labs/parallel/workload/l_hpc2n/index.html}{here}.
+    \item \textbf{NASA Ames iPSC/860 Trace:} Shorter duration scale trace with dynamic arrival bursts and high arrival density. It can be found \href{https://www.cs.huji.ac.il/labs/parallel/workload/l_nasa_ipsc/}{here}.
 \end{itemize}
 
 \subsubsection{Non-Stationary Failure Injection}

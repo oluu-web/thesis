@@ -1,12 +1,12 @@
 \section{Evaluation}
 \label{sec:Evaluation}
 
-This section presents a comprehensive empirical evaluation of our dynamic Multi-Armed Bandit (MAB) hyper-heuristic framework evaluated against real-world HPC workload traces from HPC2N and NASA Ames iPSC/860. We examine policy evolution dynamics, cumulative makespan trajectories, multi-objective trade-off profiles, and cross-algorithm selection heatmaps.
+This section covers the analysis and auditing of the scheduler evaluated on real-world workload traces.
 
 \subsection{Experimental Results and Comparative Analysis}
 
 \subsubsection{Heuristic Selection Ratio Evolution}
-Figures~\ref{fig:selection_evolution_hpc2n} and~\ref{fig:selection_evolution_nasa} track the temporal evolution of low-level heuristic (LLH) selection ratios across 100 simulation rounds using a 10-round moving window.
+Figures~\ref{fig:selection_evolution_hpc2n} and~\ref{fig:selection_evolution_nasa} track how the selection of the low-level heuristic evolves over 100 simulation rounds, using a 10round window.
 
 \begin{figure}[htbp]
     \centering
@@ -75,9 +75,9 @@ Figures~\ref{fig:selection_evolution_hpc2n} and~\ref{fig:selection_evolution_nas
 \end{figure}
 
 \begin{itemize}
-    \item \textbf{Initial Exploration Phase ($k \le 10$):} Unbiased initial sampling yields a broad distribution over the selected algorithms
-    \item \textbf{Exploitation Regime on HPC2N ($k > 15$):} On the HPC2N trace, UCB (Figure~\ref{fig:selection_hpc2n_ucb}) and Discounted UCB (Figure~\ref{fig:selection_hpc2n_discounted}) heavily exploit \texttt{hghhc}, which occupies up to $80\%$ of selection windows between rounds 40 and 90, while selectively triggering \texttt{heft} and \texttt{peft} during workload shifts around round 65 and 95. Thompson Sampling (Figure~\ref{fig:selection_hpc2n_thompson}) maintains a more continuous sampling spread between \texttt{hghhc}, \texttt{peft}, and \texttt{sufferage}.
-    \item \textbf{Phase Lock on NASA Ames:} On the NASA Ames trace, UCB (Figure~\ref{fig:selection_nasa_ucb}) locks onto \texttt{round\_robin} and \texttt{max\_min} between rounds 30 and 60 before transitioning to \texttt{peft}. Discounted UCB (Figure~\ref{fig:selection_nasa_discounted}) dynamically shuffles between \texttt{sufferage}, \texttt{simulated\_annealing}, \texttt{hghhc}, and \texttt{peft}, which prevents a premature policy saturation in highly uniform arrival regimes.
+    \item \textbf{Initial Exploration Phase ($k \le 10$):} Unbiased initial sampling shows a fair, random distribution over the selected algorithms
+    \item \textbf{Exploitation Regime on HPC2N ($k > 15$):} On the HPC2N trace, UCB (Figure~\ref{fig:selection_hpc2n_ucb}) and Discounted UCB (Figure~\ref{fig:selection_hpc2n_discounted}) decide to focus on \texttt{hghhc}, which occupies up to $80\%$ of selection windows between rounds 40 and 90, while also triggering \texttt{heft} and \texttt{peft} during shifts around round 65 and 95. Thompson Sampling (Figure~\ref{fig:selection_hpc2n_thompson}) maintains a more stable selection between \texttt{hghhc}, \texttt{peft}, and \texttt{sufferage}.
+    \item \textbf{Phase Lock on NASA Ames:} On the NASA Ames trace, UCB (Figure~\ref{fig:selection_nasa_ucb}) aggressively chooses \texttt{round\_robin} and \texttt{max\_min} between rounds 30 and 60 before moving on to \texttt{peft}. Discounted UCB (Figure~\ref{fig:selection_nasa_discounted}) constantly goes back and forth between \texttt{sufferage}, \texttt{simulated\_annealing}, \texttt{hghhc}, and \texttt{peft}.
 \end{itemize}
 
 \subsubsection{Cumulative Makespan Trajectories}
@@ -257,7 +257,7 @@ Key selection tendencies across workload domains include:
 \begin{enumerate}
     \item \textbf{Primary Arm Preference (HPC2N):} On the HPC2N trace (Figure~\ref{fig:heatmap_hpc2n}), \texttt{hghhc} dominates selection across all MAB algoorithms due to the fact that it can efficiently schedule the tasks into available virtual machines.
     \item \textbf{Workload-Driven Policy Shift (NASA Ames):} On the NASA Ames trace (Figure~\ref{fig:heatmap_nasa}), the selection density shifts dramatically away from pure metaheuristics toward list-based and priority-driven heuristics. \texttt{peft} and \texttt{sufferage} emerge as preferred arms under UCB and Discounted UCB (accounting for $\approx 38.0\%$ and $26.0\%$ of total selections, respectively), while \texttt{round\_robin} and \texttt{max\_min} are sparsely engaged during high-concurrency rounds.
-    \item \textbf{Filtering Inefficient Arms:} Inefficient or high-overhead heuristics are suppressed, receiving $\le 4.0\%$ of total choices across all MAB engines.
+    \item \textbf{Filtering Inefficient Arms:} Inefficient heuristics are discarded, accounting for $\le 4.0\%$ of total choices across all MAB algorithms.
 \end{enumerate}
 
 
@@ -270,27 +270,26 @@ Key selection tendencies across workload domains include:
 % \end{itemize}
 
 \subsection{Critical Appraisal and Methodological Limitations}
-To ensure complete transparency, we identify three methodological limitations of this study:
+We identify three methodological limitations of this study:
 
 \subsubsection{Hyperparameter Tuning and Exploration Bounds}
-The exploration factor $c = \sqrt{2}$ in UCB and discount factor $\gamma = 0.95$ in Discounted UCB were used as a global constant, which can lead to longer exploration phases than needed, which may favour sub-optimal heuristics. Finding a way to dynamically set these values will ensure that the scheduler maintains a decent balance between exploration and exploitation.
+The exploration factor $c = \sqrt{2}$ in UCB and discount factor $\gamma = 0.95$ in Discounted UCB were set as a constant, which can lead to longer exploration phases than needed. Dynamically setting these values will make sure that the scheduler finds a balance between exploration and exploitation.
 
 \subsubsection{Simulation Idealization vs. Real-World Cloud Dynamics}
 
-For the purpose of this project, we make use of CloudSim, which executes tasks deterministically. But this will never be the case in real-world scenarios, as there will be network jitter, Vm cold starts and hypervisor resource contention, which will introduce some level of variance into heuristic execution times.
+For the purpose of this project, we make use of CloudSim, which executes tasks predictably. But in real-world environments, this will never be the case as there will be network jitter, VM cold starts and so on, which will introduce variance into execution times.
 
 To bridge this gap, we can make three extensions:
 
 \begin{itemize}
-    \item \textbf{Asynchronous Policy Update:} This is going to help transition the decision plane from a periodic execution model to an asynchronous event-driven architecture that updates reward metrics instantly.
-    \item \textbf{Adaptive Reward Smoothing:} An exponential moving average on feedback to prevent anomalies from corrupting historical reward distributions.
-    \item \textbf{Fallback and Safety Bounds:} Hard SLA thresholds should be set that forces a baseline heuristic, if an exploitation arm experiences any delay.
+    \item \textbf{Asynchronous Policy Update:} Instead of periodic execution, using an asynchronous architecture that updates metrics instantly
+    \item \textbf{Adaptive Reward Smoothing:} Using a moving average to detect anomalies and prevent them from affecting historical rewards.
+    \item \textbf{Fallback and Safety Bounds:} Hard caps that force a baseline heuristic to be selected when exploitation is taking to long.
 \end{itemize}
-Deploying the current system directly onto live cloud infrastructure without these adaptation mechanisms yields predictable performance trade-offs such as an exploration phase delay, a robustness to non-stationary shift and suboptimal fine-grained decisions.
 
 
-\subsubsection{Coarse Granularity of Decision Horizons}
-Evaluating performance at batch boundaries hides task-level variations within a batch. Extremely long tasks can delay reward feedback, temporarily slowing policy adaptation.
+% \subsubsection{Coarse Granularity of Decision Horizons}
+% Evaluating performance at batch boundaries hides task-level variations within a batch. Extremely long tasks can delay reward feedback, temporarily slowing policy adaptation.
 
 \subsection{Suggested Modifications and Design Improvements}
 To address these limitations, we propose three enhancements:

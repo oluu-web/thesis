@@ -71,6 +71,14 @@ Mathew, T., Sekaran, K.~C. \harvardand\ Jose, J.  \harvardyearleft 2014\harvardy
 Saurav, S.~K. \harvardand\ Benedict, S.  \harvardyearleft 2021\harvardyearright .
 \newblock A taxonomy and survey on energy-aware scientific workflows scheduling in large-scale heterogeneous architecture, {\em 2021 6Th international conference on inventive computation technologies (icict)} pp.~820--826.
 
+\harvarditem[Shang et~al.]{Shang, Yang \harvardand\ Li}{2024}{10662607}
+Shang, Z., Yang, L. \harvardand\ Li, M.  \harvardyearleft 2024\harvardyearright .
+\newblock Two-step thompson sampling for multi-armed bandit problem, {\em 2024 43rd Chinese Control Conference (CCC)}, pp.~5802--5805.
+
+\harvarditem[Shrilekhya et~al.]{Shrilekhya, Sai \harvardand\ Seshadri}{2025}{11041325}
+Shrilekhya, N.~S., Sai, N.~K. \harvardand\ Seshadri, K.  \harvardyearleft 2025\harvardyearright .
+\newblock Upper confidence bound versus adaptive posterior sampling for multi-armed bandit game models, {\em 2025 International Conference on Innovative Trends in Information Technology (ICITIIT)}, pp.~1--6.
+
 \harvarditem[Singh et~al.]{Singh, Chakraborty, Gourisaria, Swain, Raj \harvardand\ Bandyopadhyay}{2024}{Singh2024Leveraging}
 Singh, S., Chakraborty, S., Gourisaria, M.~K., Swain, S., Raj, R. \harvardand\ Bandyopadhyay, A.  \harvardyearleft 2024\harvardyearright .
 \newblock Leveraging multi-armed bandits for cloud resource optimization, {\em 2024 First International Conference on Software, Systems and Information Technology (SSITCON)} pp.~1--6.
@@ -78,6 +86,10 @@ Singh, S., Chakraborty, S., Gourisaria, M.~K., Swain, S., Raj, R. \harvardand\ B
 \harvarditem{Sravan \harvardand\ Shaik}{2026}{Sravan2026DRL}
 Sravan, P. \harvardand\ Shaik, M.~A.  \harvardyearleft 2026\harvardyearright .
 \newblock Drl-based multi-objective task scheduling for edge-cloud computing: Latency, energy, and sla optimisation, {\em Scientific reports} {\bf 16}(1).
+
+\harvarditem{Tokic}{2010}{adaptive}
+Tokic, M.  \harvardyearleft 2010\harvardyearright .
+\newblock Adaptive $\epsilon$-greedy exploration in reinforcement learning based on value differences, {\em in} R.~Dillmann, J.~Beyerer, U.~D. Hanebeck \harvardand\ T.~Schultz (eds), {\em KI 2010: Advances in Artificial Intelligence}, Springer Berlin Heidelberg, Berlin, Heidelberg, pp.~203--210.
 
 \harvarditem{Tran-Dang \harvardand\ Kim}{2024}{Tran-Dang2024Parallel}
 Tran-Dang, H. \harvardand\ Kim, D.-S.  \harvardyearleft 2024\harvardyearright .
