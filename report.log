@@ -1272,4 +1272,110 @@ File: ./figures/hpc2n_epsilon_arm_selection_evolution.png Graphic file (type png
 <use ./figures/hpc2n_epsilon_arm_selection_evolution.png>
 Package pdftex.def Info: ./figures/hpc2n_epsilon_arm_selection_evolution.png  used on input line 36.
 (pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
-<./figures/nasa_ucb_arm_selecti
+<./figures/nasa_ucb_arm_selection_evolution.png, id=460, 867.24pt x 433.62pt>
+File: ./figures/nasa_ucb_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/nasa_ucb_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/nasa_ucb_arm_selection_evolution.png  used on input line 48.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_discounted_ucb_arm_selection_evolution.png, id=461, 867.24pt x 433.62pt>
+File: ./figures/nasa_discounted_ucb_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/nasa_discounted_ucb_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/nasa_discounted_ucb_arm_selection_evolution.png  used on input line 55.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_thompson_arm_selection_evolution.png, id=462, 867.24pt x 433.62pt>
+File: ./figures/nasa_thompson_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/nasa_thompson_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/nasa_thompson_arm_selection_evolution.png  used on input line 62.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_epsilon_arm_selection_evolution.png, id=463, 867.24pt x 433.62pt>
+File: ./figures/nasa_epsilon_arm_selection_evolution.png Graphic file (type png)
+<use ./figures/nasa_epsilon_arm_selection_evolution.png>
+Package pdftex.def Info: ./figures/nasa_epsilon_arm_selection_evolution.png  used on input line 69.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+ [13 <./figures/hpc2n_ucb_arm_selection_evolution.png> <./figures/hpc2n_discounted_ucb_arm_selection_evolution.png> <./figures/hpc2n_thompson_arm_selection_evolution.png> <./figures/hpc2n_epsilon_arm_selection_evolution.png>]
+<./figures/hpc2n_ucb_cumulative_makespan.png, id=483, 722.7pt x 361.35pt>
+File: ./figures/hpc2n_ucb_cumulative_makespan.png Graphic file (type png)
+<use ./figures/hpc2n_ucb_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/hpc2n_ucb_cumulative_makespan.png  used on input line 90.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/hpc2n_discounted_ucb_cumulative_makespan.png, id=484, 722.7pt x 361.35pt>
+File: ./figures/hpc2n_discounted_ucb_cumulative_makespan.png Graphic file (type png)
+<use ./figures/hpc2n_discounted_ucb_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/hpc2n_discounted_ucb_cumulative_makespan.png  used on input line 97.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/hpc2n_thompson_cumulative_makespan.png, id=485, 722.7pt x 361.35pt>
+File: ./figures/hpc2n_thompson_cumulative_makespan.png Graphic file (type png)
+<use ./figures/hpc2n_thompson_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/hpc2n_thompson_cumulative_makespan.png  used on input line 104.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/hpc2n_epsilon_cumulative_makespan.png, id=486, 722.7pt x 361.35pt>
+File: ./figures/hpc2n_epsilon_cumulative_makespan.png Graphic file (type png)
+<use ./figures/hpc2n_epsilon_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/hpc2n_epsilon_cumulative_makespan.png  used on input line 111.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_ucb_cumulative_makespan.png, id=487, 722.7pt x 361.35pt>
+File: ./figures/nasa_ucb_cumulative_makespan.png Graphic file (type png)
+<use ./figures/nasa_ucb_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/nasa_ucb_cumulative_makespan.png  used on input line 123.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_discounted_ucb_cumulative_makespan.png, id=488, 722.7pt x 361.35pt>
+File: ./figures/nasa_discounted_ucb_cumulative_makespan.png Graphic file (type png)
+<use ./figures/nasa_discounted_ucb_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/nasa_discounted_ucb_cumulative_makespan.png  used on input line 130.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_thompson_cumulative_makespan.png, id=489, 722.7pt x 361.35pt>
+File: ./figures/nasa_thompson_cumulative_makespan.png Graphic file (type png)
+<use ./figures/nasa_thompson_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/nasa_thompson_cumulative_makespan.png  used on input line 137.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/nasa_epsilon_cumulative_makespan.png, id=490, 722.7pt x 361.35pt>
+File: ./figures/nasa_epsilon_cumulative_makespan.png Graphic file (type png)
+<use ./figures/nasa_epsilon_cumulative_makespan.png>
+Package pdftex.def Info: ./figures/nasa_epsilon_cumulative_makespan.png  used on input line 144.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+ [14 <./figures/nasa_ucb_arm_selection_evolution.png> <./figures/nasa_discounted_ucb_arm_selection_evolution.png> <./figures/nasa_thompson_arm_selection_evolution.png> <./figures/nasa_epsilon_arm_selection_evolution.png>] [15 <./figures/hpc2n_ucb_cumulative_makespan.png> <./figures/hpc2n_discounted_ucb_cumulative_makespan.png> <./figures/hpc2n_thompson_cumulative_makespan.png> <./figures/hpc2n_epsilon_cumulative_makespan.png> <./figures/nasa_ucb_cumulative_makespan.png> <./figures/nasa_discounted_ucb_cumulative_makespan.png> <./figures/nasa_thompson_cumulative_makespan.png> <./figures/nasa_epsilon_cumulative_makespan.png>]
+<./figures/heatmap_selection_hpc2n.png, id=520, 867.24pt x 433.62pt>
+File: ./figures/heatmap_selection_hpc2n.png Graphic file (type png)
+<use ./figures/heatmap_selection_hpc2n.png>
+Package pdftex.def Info: ./figures/heatmap_selection_hpc2n.png  used on input line 241.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+<./figures/heatmap_selection_nasa.png, id=521, 867.24pt x 433.62pt>
+File: ./figures/heatmap_selection_nasa.png Graphic file (type png)
+<use ./figures/heatmap_selection_nasa.png>
+Package pdftex.def Info: ./figures/heatmap_selection_nasa.png  used on input line 248.
+(pdftex.def)             Requested size: 217.42265pt x 108.70909pt.
+ [16 <./figures/heatmap_selection_hpc2n.png> <./figures/heatmap_selection_nasa.png>]) (./text/conclusion.tex) (./report.bbl [17]
+Underfull \hbox (badness 10000) in paragraph at lines 16--19
+\OT1/cmr/bx/n/12 URL: \OT1/cmr/m/it/12 https://eds.p.ebscohost.com/eds/pdfviewer/pdfviewer?vid=0&sid=2b2c3ba3-
+ []
+
+[18]) [19] 
+enddocument/afterlastpage (AED): lastpage setting LastPage.
+(./report.aux (./titlepage.aux))
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: F6A7220CE83E647AD619EFAC627E6581;10405.
+ ) 
+Here is how much of TeX's memory you used:
+ 27841 strings out of 467525
+ 514905 string characters out of 5418982
+ 939841 words of memory out of 5000000
+ 56049 multiletter control sequences out of 15000+600000
+ 642013 words of font info for 93 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 84i,19n,131p,1086b,846s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on report.pdf (20 pages, 6286391 bytes).
+PDF statistics:
+ 685 PDF objects out of 1000 (max. 8388607)
+ 573 compressed objects within 6 object streams
+ 160 named destinations out of 1000 (max. 500000)
+ 468 words of extra memory for PDF output out of 10000 (max. 10000000)
+
