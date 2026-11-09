@@ -26,18 +26,18 @@ The low-level heuristic pool is implemented inside the Java simulation core unde
 \begin{enumerate}
     \item \textbf{List-Based Schedulers (HEFT, PEFT, Min-Min, Max-Min, Sufferage, HEFT-TD):} Custom task prioritization routines construct directed acyclic graph (DAG) task ranks and evaluate expected finish times across heterogeneous VM capacity matrices on the fly.
     \item \textbf{Deterministic Baseline (Round-Robin):} Sequentially maps incoming cloudlets to active VMs to establish a dynamic baseline for performance normalization.
-    \item \textbf{Local Search and Meta-Heuristics (Simulated Annealing, HGHHC):} Algorithmic state models execute local schedule permutations. HGHHC integrates the Henry Gas Solubility Optimization and Harris Hawks Optimization search logic by running iterative candidate schedule evaluations within bounded CloudSim time slots.
+    \item \textbf{Local Search and Meta-Heuristics (Simulated Annealing, HGHHC):} Algorithmic state models execute local schedule permutations HGHHC combines the Henry Gas Solubility Optimization and the Harris-Hawks Optimization methodologies into a singular algorithm that runs multiple evaluations within given time slots.
 \end{enumerate}
 
 \subsection{Energy, Carbon Footprint, and Cost Modeling}
 In order to accurately measure the trade-offs, some CloudSim classes had to be modified, as well as creating new modules:
 \begin{itemize}
     \item \textbf{Monetary Cost Model:} With the help of AWS billing API, we were able to simulate resource pricing. Each VM instance incurs a fixed per-second compute rate based on its allocated processing capacity (MIPS) and memory profile, following tier-based provider pricing schemes.
-    \item \textbf{Dynamic Power Model:} Power consumption $P(u)$ is calculated as a function of instantaneous CPU utilization:
+    \item \textbf{Dynamic Power Model:} Power consumption $P(u)$ is calculated as a function of CPU utilization:
     \begin{equation}
     P(u) = P_{\text{idle}} + (P_{\text{max}} - P_{\text{idle}}) \times u
     \end{equation}
-    where $P_{\text{idle}}$ represents the VM standby power, and $P_{\text{max}}$ represents peak power under full load.
+    where $P_{\text{idle}}$ represents the VM's power consumption while idle, and $P_{\text{max}}$ represents peak power under full load.
 \end{itemize}
 
 \subsection{Non-Stationary Infrastructure Fault Injection}
